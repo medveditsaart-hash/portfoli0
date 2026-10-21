@@ -42,7 +42,7 @@
             z-index: 10;
         }
 
-        /* КОНТЕЙНЕР ВКЛАДОК: РІВНОМІРНИЙ РОЗПОДІЛ ТА НАКЛАДАННЯ */
+        /* КОНТЕЙНЕР ВКЛАДОК */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -50,9 +50,10 @@
             top: 1px;
             align-items: flex-end;
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Z-INDEX ДЛЯ НАКЛАДАННЯ ЗЛІВА НАПРАВО */
         .folder-tabs > *:nth-child(1) { z-index: 4; }
         .folder-tabs > *:nth-child(2) { z-index: 3; }
         .folder-tabs > *:nth-child(3) { z-index: 2; }
@@ -67,24 +68,25 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: none;
-            padding: 8px 10px;
+            padding: 8px 8px;
             border-top-left-radius: 14px;
             border-top-right-radius: 12px;
             gap: 6px;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            flex: 1 1 auto;
+            flex: 1.1 1 0px;
             min-width: 0;
+            overflow: hidden;
         }
 
         .window-controls {
             display: flex;
-            gap: 5px;
+            gap: 4px;
             flex-shrink: 0;
         }
 
         .control-btn {
-            width: 11px;
-            height: 11px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -100,13 +102,13 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: none;
-            padding: 8px 10px;
+            padding: 8px 4px;
             border-top-left-radius: 12px;
             border-top-right-radius: 12px;
             font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: #0c2014;
             cursor: pointer;
             text-transform: uppercase;
@@ -116,10 +118,12 @@
             gap: 4px;
             transition: all 0.2s ease;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            flex: 1 1 auto;
+            flex: 1 1 0px;
             min-width: 0;
-            margin-left: -10px;
+            margin-left: -8px;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .left-tab-group .tab-btn-inline {
@@ -128,9 +132,9 @@
             box-shadow: none;
             padding: 0;
             font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: #0c2014;
             cursor: pointer;
             text-transform: uppercase;
@@ -172,6 +176,7 @@
                         inset 0 1px 1px rgba(255, 255, 255, 0.6);
             overflow: hidden;
             z-index: 1;
+            width: 100%;
         }
 
         .window-body {
@@ -245,7 +250,7 @@
             color: #f0f5ed;
         }
 
-        /* POPUP WINDOWS */
+        /* ЗВИЧАЙНІ ПОП-АП ВІКНА */
         .pop-window {
             display: none;
             position: fixed;
@@ -327,16 +332,84 @@
             opacity: 0.9;
         }
 
+        /* ПОВНОЕКРАННИЙ РЕЖИМ ДЛЯ ПРОЄКТІВ (BEHANCE STYLE) */
+        .pop-window.full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            top: 0 !important;
+            left: 0 !important;
+            transform: none !important;
+            border-radius: 0 !important;
+            border: none !important;
+            background: #f4f5f1;
+        }
+
+        .pop-header.project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            background: rgba(245, 247, 242, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            cursor: default;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .project-author-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .project-title-text strong {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0c2014;
+            line-height: 1.2;
+        }
+
+        .project-title-text span {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.74rem;
+            color: #4a5d50;
+            font-weight: 500;
+        }
+
+        .pop-body.project-body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
         /* БЕХАНС ФОРМАТ ДЛЯ ІЛЮСТРАЦІЙ */
         .behance-feed {
             display: flex;
             flex-direction: column;
             width: 100%;
             gap: 0;
-            margin-top: 8px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            margin: 0;
+            padding: 0;
         }
 
         .behance-feed img {
@@ -420,17 +493,17 @@
         /* АДАПТИВНІСТЬ ДЛЯ ВУЗЬКИХ МОБІЛЬНИХ ЕКРАНІВ */
         @media (max-width: 520px) {
             .left-tab-group {
-                padding: 6px 6px;
-                gap: 4px;
+                padding: 6px 4px;
+                gap: 3px;
             }
             .tab-btn {
-                padding: 6px 4px;
-                font-size: 0.56rem;
+                padding: 6px 2px;
+                font-size: 0.54rem;
                 letter-spacing: 0;
-                margin-left: -13px;
+                margin-left: -10px;
             }
             .left-tab-group .tab-btn-inline {
-                font-size: 0.56rem;
+                font-size: 0.54rem;
                 letter-spacing: 0;
             }
             .tab-icon {
@@ -438,23 +511,26 @@
                 height: 10px;
             }
             .window-controls {
-                gap: 3px;
+                gap: 2px;
             }
             .control-btn {
-                width: 9px;
-                height: 9px;
+                width: 8px;
+                height: 8px;
             }
             .hero-title { font-size: 3rem; }
             .window-body { padding: 20px 14px; }
             .pop-body { padding: 16px 12px; }
+            .project-title-text strong { font-size: 0.78rem; }
+            .project-title-text span { font-size: 0.68rem; }
+            .project-author-avatar { width: 30px; height: 30px; }
         }
 
         @media (max-width: 380px) {
             .tab-btn, .left-tab-group .tab-btn-inline {
-                font-size: 0.5rem;
+                font-size: 0.48rem;
             }
             .tab-btn {
-                margin-left: -15px;
+                margin-left: -12px;
             }
         }
     </style>
@@ -613,16 +689,19 @@
         </div>
     </div>
 
-    <!-- ВІКНО ILLUSTRATION (ОНОВЛЕНІ ШЛЯХИ ДО ЗОБРАЖЕНЬ) -->
-    <div class="pop-window" id="illustration-pop">
-        <div class="pop-header">
-            <span>ILLUSTRATION</span>
+    <!-- ВІКНО ILLUSTRATION (ПОВНОЕКРАННЕ ВІКНО BEHANCE) -->
+    <div class="pop-window full-screen" id="illustration-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.jpg" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Little Wild Things | Illustrated Book</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
             <button class="close-pop-btn" onclick="closePop('illustration-pop')"></button>
         </div>
-        <div class="pop-body">
-            <h2>Illustrations</h2>
-            <p class="pop-desc">Little Wild Things Illustrated Guide — Behance Case Study</p>
-
+        <div class="pop-body project-body">
             <div class="behance-feed">
                 <img src="ill_book_1/ill_book1.png" alt="Illustration Book 1">
                 <img src="ill_book_1/ill_book2.png" alt="Illustration Book 2">
@@ -667,9 +746,15 @@
             closeAllPops();
             const pop = document.getElementById(id);
             if(pop) {
-                pop.style.top = '50%';
-                pop.style.left = '50%';
-                pop.style.transform = 'translate(-50%, -50%)';
+                if (pop.classList.contains('full-screen')) {
+                    pop.style.top = '0';
+                    pop.style.left = '0';
+                    pop.style.transform = 'none';
+                } else {
+                    pop.style.top = '50%';
+                    pop.style.left = '50%';
+                    pop.style.transform = 'translate(-50%, -50%)';
+                }
                 pop.classList.add('active');
             }
         }
@@ -694,6 +779,7 @@
             let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
 
             const startDrag = (clientX, clientY) => {
+                if (pop.classList.contains('full-screen')) return; // Вимикаємо перетягування для повноекранних вікон
                 isDragging = true;
                 const rect = pop.getBoundingClientRect();
                 
