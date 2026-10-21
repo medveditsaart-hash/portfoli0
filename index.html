@@ -42,7 +42,7 @@
             z-index: 10;
         }
 
-        /* КОНТЕЙНЕР ВКЛАДОК */
+        /* КОНТЕЙНЕР ВКЛАДОК: СТРОГО В МЕЖАХ 100% ШИРИНИ ПАПКИ */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -54,6 +54,7 @@
             box-sizing: border-box;
         }
 
+        /* Z-INDEX ДЛЯ НАКЛАДАННЯ ЗЛІВА НАПРАВО */
         .folder-tabs > *:nth-child(1) { z-index: 4; }
         .folder-tabs > *:nth-child(2) { z-index: 3; }
         .folder-tabs > *:nth-child(3) { z-index: 2; }
@@ -73,7 +74,7 @@
             border-top-right-radius: 12px;
             gap: 6px;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            flex: 1.1 1 0px;
+            flex: 1 1 0px;
             min-width: 0;
             overflow: hidden;
         }
@@ -120,7 +121,7 @@
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
             flex: 1 1 0px;
             min-width: 0;
-            margin-left: -8px;
+            margin-left: -12px; /* Щільніше накладання для компенсації ширини */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -250,7 +251,7 @@
             color: #f0f5ed;
         }
 
-        /* ЗВИЧАЙНІ ПОП-АП ВІКНА */
+        /* POPUP WINDOWS */
         .pop-window {
             display: none;
             position: fixed;
@@ -498,12 +499,12 @@
             }
             .tab-btn {
                 padding: 6px 2px;
-                font-size: 0.54rem;
+                font-size: 0.52rem;
                 letter-spacing: 0;
-                margin-left: -10px;
+                margin-left: -14px;
             }
             .left-tab-group .tab-btn-inline {
-                font-size: 0.54rem;
+                font-size: 0.52rem;
                 letter-spacing: 0;
             }
             .tab-icon {
@@ -527,10 +528,10 @@
 
         @media (max-width: 380px) {
             .tab-btn, .left-tab-group .tab-btn-inline {
-                font-size: 0.48rem;
+                font-size: 0.46rem;
             }
             .tab-btn {
-                margin-left: -12px;
+                margin-left: -16px;
             }
         }
     </style>
@@ -693,7 +694,7 @@
     <div class="pop-window full-screen" id="illustration-pop">
         <div class="pop-header project-header">
             <div class="project-author-info">
-                <img src="me.jpg" alt="Kate Medvid" class="project-author-avatar">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
                 <div class="project-title-text">
                     <strong>Little Wild Things | Illustrated Book</strong>
                     <span>Kate Medvid</span>
@@ -779,7 +780,7 @@
             let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
 
             const startDrag = (clientX, clientY) => {
-                if (pop.classList.contains('full-screen')) return; // Вимикаємо перетягування для повноекранних вікон
+                if (pop.classList.contains('full-screen')) return;
                 isDragging = true;
                 const rect = pop.getBoundingClientRect();
                 
