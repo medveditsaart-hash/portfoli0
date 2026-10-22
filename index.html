@@ -42,7 +42,7 @@
             z-index: 10;
         }
 
-        /* ПАНЕЛЬ ВКЛАДОК: ЛИШЕ НАЗВИ ПРОЄКТІВ */
+        /* ПАНЕЛЬ ВКЛАДОК */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -129,7 +129,6 @@
             text-align: center;
         }
 
-        /* МЕТА-ІНФОРМАЦІЯ БЕЗ РОКУ 2026 */
         .meta-info {
             display: flex;
             justify-content: center;
@@ -167,7 +166,6 @@
             text-transform: uppercase;
         }
 
-        /* ФУТЕР З КНОПКОЮ ABOUT В СТИЛІ ЕМАІЛ ТА ЛІНКЕДІН */
         .window-footer {
             display: flex;
             justify-content: space-between;
@@ -287,7 +285,7 @@
             opacity: 0.9;
         }
 
-        /* ПОВНОЕКРАННИЙ РЕЖИМ ДЛЯ ПРОЄКТІВ (BEHANCE STYLE) */
+        /* ПОВНОЕКРАННИЙ РЕЖИМ ДЛЯ ПРОЄКТІВ */
         .pop-window.full-screen {
             width: 100vw !important;
             height: 100vh !important;
@@ -357,7 +355,6 @@
             width: 100%;
         }
 
-        /* БЕХАНС ФОРМАТ ДЛЯ ІЛЮСТРАЦІЙ */
         .behance-feed {
             display: flex;
             flex-direction: column;
@@ -378,3 +375,366 @@
 
         .pop-gif {
             width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            margin: 0 auto 18px auto;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .about-summary {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 24px;
+            color: #183624;
+        }
+
+        .section-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #0e3019;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(14, 48, 25, 0.2);
+            padding-bottom: 6px;
+            margin: 20px 0 12px 0;
+        }
+
+        .skills-list {
+            list-style: none;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .skills-list li {
+            margin-bottom: 4px;
+        }
+
+        .job-item {
+            margin-bottom: 18px;
+        }
+
+        .job-header {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0e3019;
+        }
+
+        .job-desc {
+            list-style: disc;
+            padding-left: 18px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            margin-top: 6px;
+            color: #21422f;
+        }
+
+        .job-desc li {
+            margin-bottom: 4px;
+        }
+
+        .edu-item, .lang-item {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 520px) {
+            .tab-btn {
+                padding: 7px 4px;
+                font-size: 0.55rem;
+                letter-spacing: 0;
+            }
+            .tab-icon {
+                width: 10px;
+                height: 10px;
+            }
+            .hero-title { font-size: 3rem; }
+            .window-body { padding: 20px 14px; }
+            .pop-body { padding: 16px 12px; }
+            .project-title-text strong { font-size: 0.78rem; }
+            .project-title-text span { font-size: 0.68rem; }
+            .project-author-avatar { width: 30px; height: 30px; }
+            .footer-btn, .contacts-links a {
+                padding: 4px 8px;
+                font-size: 0.68rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay" onclick="closeAllPops()"></div>
+
+    <div class="folder-container" id="main-folder">
+        <div class="folder-tabs">
+            <button class="tab-btn" onclick="openPop('illustration-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                ILLUSTRATION
+            </button>
+            
+            <button class="tab-btn" onclick="openPop('branding-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                BRANDING
+            </button>
+
+            <button class="tab-btn" onclick="openPop('social-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                SOCIAL
+            </button>
+        </div>
+
+        <div class="window">
+            <div class="window-body">
+                <div class="meta-info">
+                    <span>LOCATION: KYIV, UKRAINE</span>
+                </div>
+
+                <h1 class="hero-title">Kate<br>Medvid</h1>
+                
+                <div class="divider-line"></div>
+                
+                <p class="hero-subtitle">Graphic Design</p>
+
+                <div class="window-footer">
+                    <button class="footer-btn" onclick="openPop('about-pop')">About</button>
+                    <div class="contacts-links">
+                        <a href="mailto:kate.medvid@example.com">Email</a>
+                        <a href="https://www.linkedin.com/in/medveditsaart/" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО ABOUT ME -->
+    <div class="pop-window" id="about-pop">
+        <div class="pop-header">
+            <span>ABOUT ME</span>
+            <button class="close-pop-btn" onclick="closePop('about-pop')"></button>
+        </div>
+        <div class="pop-body">
+            <h2>Kate Medvid</h2>
+            
+            <img src="https://lh3.googleusercontent.com/d/1IbMBhcDUV0SK6dwkVtHj7UJZmoXoGmyW" alt="Kate Medvid" class="pop-gif">
+
+            <p class="about-summary">
+                Senior Graphic Designer with 10 years of experience in brand identity, social-first creative, and AI-assisted visual production. Skilled at building scalable brand systems for media channels reaching 3M+ audience across the U.S. and European markets. Combines strong typography and composition fundamentals with hands-on expertise in AI image generation to deliver high-volume creative output at consistent brand quality.
+            </p>
+
+            <div class="section-title">TECHNICAL SKILLS</div>
+            <ul class="skills-list">
+                <li><strong>Design Tools:</strong> Figma, Adobe Photoshop, Illustrator, InDesign, Canva</li>
+                <li><strong>Motion & Video:</strong> Adobe After Effects, Premiere Pro</li>
+                <li><strong>AI Tools:</strong> Midjourney, Adobe Firefly, ChatGPT, Gemini, Claude</li>
+                <li><strong>Other:</strong> Pre-press, Typography, Color Theory, Jira, Trello, Slack, Tilda, WIX</li>
+            </ul>
+
+            <div class="section-title">WORK EXPERIENCE</div>
+            
+            <div class="job-item">
+                <div class="job-header">Genesis, AMO — Senior Graphic Designer | June 2021 – July 2026</div>
+                <ul class="job-desc">
+                    <li>Developed visual identity and creative systems for 10+ social media channels (Meta, TikTok, YouTube, Snapchat) targeting U.S. and European audiences, contributing to combined reach of 3M+ followers across platforms.</li>
+                    <li>Designed AI-assisted key art and poster series for a vertical-drama streaming platform, maintaining consistent characters and visual style across a multi-episode content library for B2B clients.</li>
+                    <li>Designed presentations and sales decks for the sales team, supporting deal closures.</li>
+                    <li>Led and reviewed work of 3 junior designers, maintaining consistent quality and creative standards across the team's output.</li>
+                    <li>Participated in and led one of the teams working on new YouTube projects within the company.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">1+1 media — Middle Graphic Designer | June 2019 – June 2021</div>
+                <ul class="job-desc">
+                    <li>Developed brand books and visual identity guidelines for internal company products, ensuring consistency across all touchpoints.</li>
+                    <li>Retouched and prepared photos of actors and TV hosts for further animation and use in broadcast graphics.</li>
+                    <li>Collaborated with the Marketing Department to develop a consistent tone of voice and visual identity for social media.</li>
+                    <li>Served as the lead designer for the website’s visual, as well as for organizational and promotional materials, from concept through launch, for the 1+1 Digital Weekend 2020 conference.</li>
+                    <li>Designed creative landing pages for informational products, focusing on visual storytelling and user engagement.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">PlusOne DA — Middle Graphic Designer | May 2018 – May 2019</div>
+                <ul class="job-desc">
+                    <li>Created frame-by-frame graphic illustrations and storyboard visuals for video content for clients such as DTEK and Bogdan Corporation.</li>
+                    <li>Designed custom sticker packs and digital assets optimized for social media and messaging platforms.</li>
+                    <li>Developed creative concepts and visual materials for political and pre-election campaigns, focusing on clear communication and audience engagement.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">FASHION-PR — Graphic Designer | July 2017 – April 2018</div>
+                <ul class="job-desc">
+                    <li>Developed and executed social media promotional campaigns for major international brands, including Conte, Lacoste, Liska, Marks & Spencer, English Home, and Unice.</li>
+                    <li>Created print-ready layouts and marketing materials for two large-scale branded events: the launch of Lacoste's new collection in Odesa and the Fashionology in-person conference in Kyiv.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">Kyiv Academic Youth Theatre — Graphic Designer | August 2016 – July 2017</div>
+                <ul class="job-desc">
+                    <li>Designing posters and handouts for theater productions (Pre-press).</li>
+                    <li>Designing banners and billboards for outdoor advertising in the city.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">Freelance Graphic Designer | April 2016 – Present</div>
+                <ul class="job-desc">
+                    <li>Retouched and processed over 500+ images for e-commerce catalogs.</li>
+                    <li>Designed original prints and graphic patterns for clothing collections, aligning with brand identity and seasonal trends.</li>
+                    <li>Designed book covers and handled layout/typesetting, ensuring visually compelling and print-ready publications.</li>
+                    <li>Designed music album cover artworks.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">EDUCATION</div>
+            <div class="edu-item"><strong>Bachelor’s Degree in Engineering Technology</strong> — KNUTD, Kyiv | 2011</div>
+            <div class="edu-item"><strong>Master's Degree in Design / Fine Arts</strong> — KNUTD, Kyiv | 2013</div>
+            <div class="edu-item"><strong>Illustration Pro</strong> — Projector Institute, Kyiv | 2021</div>
+            <div class="edu-item"><strong>Motion Design Beginning</strong> — Projector Institute, Kyiv | 2022</div>
+            <div class="edu-item"><strong>Work with Figma</strong> — Cases, Kyiv | 2023</div>
+
+            <div class="section-title">LANGUAGES</div>
+            <div class="lang-item"><strong>Ukrainian</strong> — Native</div>
+            <div class="lang-item"><strong>English</strong> — Upper-Intermediate</div>
+            <div class="lang-item"><strong>Portuguese</strong> — Elementary</div>
+        </div>
+    </div>
+
+    <!-- ВІКНО ILLUSTRATION (ПОВНОЕКРАННЕ ВІКНО BEHANCE) -->
+    <div class="pop-window full-screen" id="illustration-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Little Wild Things | Illustrated Book</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <button class="close-pop-btn" onclick="closePop('illustration-pop')"></button>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="ill_book_1/ill_book1.png" alt="Illustration Book 1">
+                <img src="ill_book_1/ill_book2.png" alt="Illustration Book 2">
+                <img src="ill_book_1/ill_book3.png" alt="Illustration Book 3">
+                <img src="ill_book_1/ill_book4.png" alt="Illustration Book 4">
+                <img src="ill_book_1/ill_book5.png" alt="Illustration Book 5">
+                <img src="ill_book_1/ill_book6.png" alt="Illustration Book 6">
+                <img src="ill_book_1/ill_book7.png" alt="Illustration Book 7">
+                <img src="ill_book_1/ill_book8.png" alt="Illustration Book 8">
+                <img src="ill_book_1/ill_book9.png" alt="Illustration Book 9">
+                <img src="ill_book_1/ill_book91.png" alt="Illustration Book 91">
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО BRANDING -->
+    <div class="pop-window" id="branding-pop">
+        <div class="pop-header">
+            <span>BRANDING</span>
+            <button class="close-pop-btn" onclick="closePop('branding-pop')"></button>
+        </div>
+        <div class="pop-body">
+            <h2>Branding</h2>
+            <p class="pop-desc">Проєкти айдентики, пакування та дизайн-систем.</p>
+        </div>
+    </div>
+
+    <!-- ВІКНО SOCIAL -->
+    <div class="pop-window" id="social-pop">
+        <div class="pop-header">
+            <span>SOCIAL MEDIA</span>
+            <button class="close-pop-btn" onclick="closePop('social-pop')"></button>
+        </div>
+        <div class="pop-body">
+            <h2>Social Media</h2>
+            <p class="pop-desc">Креативні кампанії, креативи для соцмереж та SMM-системи.</p>
+        </div>
+    </div>
+
+    <script>
+        function openPop(id) {
+            closeAllPops();
+            const pop = document.getElementById(id);
+            if(pop) {
+                if (pop.classList.contains('full-screen')) {
+                    pop.style.top = '0';
+                    pop.style.left = '0';
+                    pop.style.transform = 'none';
+                } else {
+                    pop.style.top = '50%';
+                    pop.style.left = '50%';
+                    pop.style.transform = 'translate(-50%, -50%)';
+                }
+                pop.classList.add('active');
+            }
+        }
+
+        function closePop(id) {
+            const pop = document.getElementById(id);
+            if(pop) {
+                pop.classList.remove('active');
+            }
+        }
+
+        function closeAllPops() {
+            document.querySelectorAll('.pop-window').forEach(w => w.classList.remove('active'));
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllPops();
+        });
+
+        document.querySelectorAll('.pop-window').forEach(pop => {
+            const header = pop.querySelector('.pop-header');
+            let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
+
+            const startDrag = (clientX, clientY) => {
+                if (pop.classList.contains('full-screen')) return;
+                isDragging = true;
+                const rect = pop.getBoundingClientRect();
+                
+                pop.style.left = rect.left + 'px';
+                pop.style.top = rect.top + 'px';
+                pop.style.transform = 'none';
+
+                startX = clientX;
+                startY = clientY;
+                initialLeft = rect.left;
+                initialTop = rect.top;
+            };
+
+            const doDrag = (clientX, clientY) => {
+                if (!isDragging) return;
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+                pop.style.left = (initialLeft + dx) + 'px';
+                pop.style.top = (initialTop + dy) + 'px';
+            };
+
+            const stopDrag = () => { isDragging = false; };
+
+            header.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+            document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+            document.addEventListener('mouseup', stopDrag);
+
+            header.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                startDrag(touch.clientX, touch.clientY);
+            });
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                doDrag(touch.clientX, touch.clientY);
+            });
+            document.addEventListener('touchend', stopDrag);
+        });
+    </script>
+</body>
+</html>
