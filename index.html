@@ -42,7 +42,7 @@
             z-index: 10;
         }
 
-        /* ПАНЕЛЬ ВКЛАДОК */
+        /* ПАНЕЛЬ ВКЛАДОК: ОБМЕЖЕНО ПРАВИЙ КРАЙ ДЛЯ УНИКНЕННЯ ВИСТУПАННЯ SOCIAL */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -51,11 +51,48 @@
             align-items: flex-end;
             width: 100%;
             box-sizing: border-box;
+            padding-right: 22px;
         }
 
-        .folder-tabs > *:nth-child(1) { z-index: 3; }
-        .folder-tabs > *:nth-child(2) { z-index: 2; }
-        .folder-tabs > *:nth-child(3) { z-index: 1; }
+        .folder-tabs > *:nth-child(1) { z-index: 4; }
+        .folder-tabs > *:nth-child(2) { z-index: 3; }
+        .folder-tabs > *:nth-child(3) { z-index: 2; }
+        .folder-tabs > *:nth-child(4) { z-index: 1; }
+
+        /* БЛОК З 3 КОЛЬОРОВИМИ КОЛАМИ */
+        .controls-tab {
+            position: relative;
+            background: rgba(230, 235, 222, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: none;
+            padding: 9px 12px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            flex: 0 0 auto;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .control-btn {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .close { background: #ff5f56; border: 1px solid #e0443e; }
+        .minimize { background: #ffbd2e; border: 1px solid #dea123; }
+        .maximize { background: #27c93f; border: 1px solid #1aab29; }
 
         .tab-btn {
             position: relative;
@@ -82,13 +119,10 @@
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
             flex: 1 1 0px;
             min-width: 0;
+            margin-left: -8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-
-        .tab-btn:not(:first-child) {
-            margin-left: -8px;
         }
 
         .tab-btn:hover {
@@ -190,6 +224,7 @@
             cursor: pointer;
             font-size: 0.75rem;
             font-weight: 700;
+            text-transform: uppercase;
             display: inline-flex;
             align-items: center;
         }
@@ -443,10 +478,21 @@
         }
 
         @media (max-width: 520px) {
+            .folder-tabs {
+                padding-right: 18px;
+            }
+            .controls-tab {
+                padding: 7px 8px;
+            }
+            .control-btn {
+                width: 8px;
+                height: 8px;
+            }
             .tab-btn {
-                padding: 7px 4px;
-                font-size: 0.55rem;
+                padding: 7px 3px;
+                font-size: 0.52rem;
                 letter-spacing: 0;
+                margin-left: -6px;
             }
             .tab-icon {
                 width: 10px;
@@ -471,6 +517,14 @@
 
     <div class="folder-container" id="main-folder">
         <div class="folder-tabs">
+            <div class="controls-tab">
+                <div class="window-controls">
+                    <div class="control-btn close" onclick="closeAllPops()"></div>
+                    <div class="control-btn minimize"></div>
+                    <div class="control-btn maximize"></div>
+                </div>
+            </div>
+
             <button class="tab-btn" onclick="openPop('illustration-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 ILLUSTRATION
@@ -500,7 +554,7 @@
                 <p class="hero-subtitle">Graphic Design</p>
 
                 <div class="window-footer">
-                    <button class="footer-btn" onclick="openPop('about-pop')">About</button>
+                    <button class="footer-btn" onclick="openPop('about-pop')">ABOUT</button>
                     <div class="contacts-links">
                         <a href="mailto:kate.medvid@example.com">Email</a>
                         <a href="https://www.linkedin.com/in/medveditsaart/" target="_blank" rel="noopener">LinkedIn</a>
