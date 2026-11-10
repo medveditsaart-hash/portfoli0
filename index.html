@@ -256,7 +256,7 @@
         }
 
         .pop-window.active {
-            display: flex !important;
+            display: flex;
             flex-direction: column;
         }
 
@@ -509,29 +509,33 @@
 </head>
 <body>
 
-    <div class="bg-overlay" id="overlay"></div>
+    <div class="bg-overlay" onclick="closeAllPops()"></div>
 
     <div class="folder-container" id="main-folder">
+        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ -->
         <div class="folder-tabs">
-            <div class="tab-btn has-controls" data-pop="illustration-pop">
+            <!-- Вкладка 1: З 3 кольоровими точками всередині першої кнопки -->
+            <button type="button" class="tab-btn has-controls" onclick="openPop('illustration-pop')">
                 <span class="window-controls">
-                    <span class="control-btn close" id="close-all-btn"></span>
-                    <span class="control-btn minimize"></span>
-                    <span class="control-btn maximize"></span>
+                    <span class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></span>
+                    <span class="control-btn minimize" onclick="event.stopPropagation()"></span>
+                    <span class="control-btn maximize" onclick="event.stopPropagation()"></span>
                 </span>
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 ILLUSTRATION
-            </div>
+            </button>
             
-            <div class="tab-btn" data-pop="branding-pop">
+            <!-- Вкладка 2 -->
+            <button type="button" class="tab-btn" onclick="openPop('branding-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                 BRANDING
-            </div>
+            </button>
 
-            <div class="tab-btn" data-pop="social-pop">
+            <!-- Вкладка 3 -->
+            <button type="button" class="tab-btn" onclick="openPop('social-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 SOCIAL
-            </div>
+            </button>
         </div>
 
         <div class="window">
@@ -547,7 +551,7 @@
                 <p class="hero-subtitle">Graphic Design</p>
 
                 <div class="window-footer">
-                    <div class="footer-btn" data-pop="about-pop">ABOUT</div>
+                    <button type="button" class="footer-btn" onclick="openPop('about-pop')">ABOUT</button>
                     <div class="contacts-links">
                         <a href="mailto:kate.medvid@example.com">Email</a>
                         <a href="https://www.linkedin.com/in/medveditsaart/" target="_blank" rel="noopener">LinkedIn</a>
@@ -561,10 +565,11 @@
     <div class="pop-window" id="about-pop">
         <div class="pop-header">
             <span>ABOUT ME</span>
-            <span class="close-pop-btn" data-close="about-pop"></span>
+            <button type="button" class="close-pop-btn" onclick="closePop('about-pop')"></button>
         </div>
         <div class="pop-body">
             <h2>Kate Medvid</h2>
+            
             <img src="https://lh3.googleusercontent.com/d/1IbMBhcDUV0SK6dwkVtHj7UJZmoXoGmyW" alt="Kate Medvid" class="pop-gif">
 
             <p class="about-summary">
@@ -662,7 +667,7 @@
                     <span>Kate Medvid</span>
                 </div>
             </div>
-            <span class="close-pop-btn" data-close="illustration-pop"></span>
+            <button type="button" class="close-pop-btn" onclick="closePop('illustration-pop')"></button>
         </div>
         <div class="pop-body project-body">
             <div class="behance-feed">
@@ -676,10 +681,6 @@
                 <img src="ill_book_1/ill_book8.png" alt="Illustration Book 8">
                 <img src="ill_book_1/ill_book9.png" alt="Illustration Book 9">
                 <img src="ill_book_1/ill_book91.png" alt="Illustration Book 91">
-                <video autoplay loop muted playsinline>
-                    <source src="ill_book_1/ill_book92.mp4" type="video/mp4">
-                    <source src="ill_book92.mp4" type="video/mp4">
-                </video>
             </div>
         </div>
     </div>
@@ -694,7 +695,7 @@
                     <span>Kate Medvid</span>
                 </div>
             </div>
-            <span class="close-pop-btn" data-close="branding-pop"></span>
+            <button type="button" class="close-pop-btn" onclick="closePop('branding-pop')"></button>
         </div>
         <div class="pop-body project-body">
             <div class="behance-feed">
@@ -719,7 +720,7 @@
     <div class="pop-window" id="social-pop">
         <div class="pop-header">
             <span>SOCIAL MEDIA</span>
-            <span class="close-pop-btn" data-close="social-pop"></span>
+            <button type="button" class="close-pop-btn" onclick="closePop('social-pop')"></button>
         </div>
         <div class="pop-body">
             <h2>Social Media</h2>
@@ -728,26 +729,75 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const closeAllPops = () => {
-                document.querySelectorAll('.pop-window').forEach(w => w.classList.remove('active'));
+        function openPop(id) {
+            closeAllPops();
+            const pop = document.getElementById(id);
+            if (pop) {
+                pop.classList.add('active');
+            }
+        }
+
+        function closePop(id) {
+            const pop = document.getElementById(id);
+            if (pop) {
+                pop.classList.remove('active');
+            }
+        }
+
+        function closeAllPops() {
+            document.querySelectorAll('.pop-window').forEach(w => w.classList.remove('active'));
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllPops();
+        });
+
+        document.querySelectorAll('.pop-window').forEach(pop => {
+            const header = pop.querySelector('.pop-header');
+            if (!header) return;
+
+            let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
+
+            const startDrag = (clientX, clientY) => {
+                if (pop.classList.contains('full-screen')) return;
+                isDragging = true;
+                const rect = pop.getBoundingClientRect();
+                
+                pop.style.left = rect.left + 'px';
+                pop.style.top = rect.top + 'px';
+                pop.style.transform = 'none';
+
+                startX = clientX;
+                startY = clientY;
+                initialLeft = rect.left;
+                initialTop = rect.top;
             };
 
-            const openPop = (id) => {
-                closeAllPops();
-                const pop = document.getElementById(id);
-                if (pop) {
-                    if (pop.classList.contains('full-screen')) {
-                        pop.style.top = '0px';
-                        pop.style.left = '0px';
-                        pop.style.transform = 'none';
-                    } else {
-                        pop.style.top = '50%';
-                        pop.style.left = '50%';
-                        pop.style.transform = 'translate(-50%, -50%)';
-                    }
-                    pop.classList.add('active');
-                }
+            const doDrag = (clientX, clientY) => {
+                if (!isDragging) return;
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+                pop.style.left = (initialLeft + dx) + 'px';
+                pop.style.top = (initialTop + dy) + 'px';
             };
 
-            // Прив'язка кліків до вкладок і
+            const stopDrag = () => { isDragging = false; };
+
+            header.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+            document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+            document.addEventListener('mouseup', stopDrag);
+
+            header.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                startDrag(touch.clientX, touch.clientY);
+            });
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                doDrag(touch.clientX, touch.clientY);
+            });
+            document.addEventListener('touchend', stopDrag);
+        });
+    </script>
+</body>
+</html>
