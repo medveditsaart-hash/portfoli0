@@ -509,33 +509,29 @@
 </head>
 <body>
 
-    <div class="bg-overlay" onclick="closeAllPops()"></div>
+    <div class="bg-overlay" id="overlay"></div>
 
     <div class="folder-container" id="main-folder">
-        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ -->
         <div class="folder-tabs">
-            <!-- Вкладка 1: З 3 кольоровими точками всередині першої кнопки -->
-            <button type="button" class="tab-btn has-controls" onclick="openPop('illustration-pop')">
+            <div class="tab-btn has-controls" data-pop="illustration-pop">
                 <span class="window-controls">
-                    <span class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></span>
-                    <span class="control-btn minimize" onclick="event.stopPropagation()"></span>
-                    <span class="control-btn maximize" onclick="event.stopPropagation()"></span>
+                    <span class="control-btn close" id="close-all-btn"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
                 </span>
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 ILLUSTRATION
-            </button>
+            </div>
             
-            <!-- Вкладка 2 -->
-            <button type="button" class="tab-btn" onclick="openPop('branding-pop')">
+            <div class="tab-btn" data-pop="branding-pop">
                 <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                 BRANDING
-            </button>
+            </div>
 
-            <!-- Вкладка 3 -->
-            <button type="button" class="tab-btn" onclick="openPop('social-pop')">
+            <div class="tab-btn" data-pop="social-pop">
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 SOCIAL
-            </button>
+            </div>
         </div>
 
         <div class="window">
@@ -551,7 +547,7 @@
                 <p class="hero-subtitle">Graphic Design</p>
 
                 <div class="window-footer">
-                    <button type="button" class="footer-btn" onclick="openPop('about-pop')">ABOUT</button>
+                    <div class="footer-btn" data-pop="about-pop">ABOUT</div>
                     <div class="contacts-links">
                         <a href="mailto:kate.medvid@example.com">Email</a>
                         <a href="https://www.linkedin.com/in/medveditsaart/" target="_blank" rel="noopener">LinkedIn</a>
@@ -565,11 +561,10 @@
     <div class="pop-window" id="about-pop">
         <div class="pop-header">
             <span>ABOUT ME</span>
-            <button type="button" class="close-pop-btn" onclick="closePop('about-pop')"></button>
+            <span class="close-pop-btn" data-close="about-pop"></span>
         </div>
         <div class="pop-body">
             <h2>Kate Medvid</h2>
-            
             <img src="https://lh3.googleusercontent.com/d/1IbMBhcDUV0SK6dwkVtHj7UJZmoXoGmyW" alt="Kate Medvid" class="pop-gif">
 
             <p class="about-summary">
@@ -667,7 +662,7 @@
                     <span>Kate Medvid</span>
                 </div>
             </div>
-            <button type="button" class="close-pop-btn" onclick="closePop('illustration-pop')"></button>
+            <span class="close-pop-btn" data-close="illustration-pop"></span>
         </div>
         <div class="pop-body project-body">
             <div class="behance-feed">
@@ -693,4 +688,66 @@
     <div class="pop-window full-screen" id="branding-pop">
         <div class="pop-header project-header">
             <div class="project-author-info">
-                <img src="me.png" alt="Kate
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Vorotnikova atelier | Branding</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <span class="close-pop-btn" data-close="branding-pop"></span>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="logo_vorotnikova/Блок1. First.jpg" alt="Vorotnikova Atelier Block 1">
+                <img src="logo_vorotnikova/Блок2. Info. Logo.png" alt="Vorotnikova Atelier Block 2">
+                <img src="logo_vorotnikova/Блок3. Font.jpg" alt="Vorotnikova Atelier Block 3">
+                <img src="logo_vorotnikova/Блок4. Mokap.jpg" alt="Vorotnikova Atelier Block 4">
+                <video autoplay loop muted playsinline>
+                    <source src="logo_vorotnikova/Блок5. Video.mp4" type="video/mp4">
+                </video>
+                <img src="logo_vorotnikova/Блок6. Visit.jpg" alt="Vorotnikova Atelier Block 6">
+                <img src="logo_vorotnikova/Блок7. Mokap.jpg" alt="Vorotnikova Atelier Block 7">
+                <img src="logo_vorotnikova/Блок8. Social.jpg" alt="Vorotnikova Atelier Block 8">
+                <video autoplay loop muted playsinline>
+                    <source src="Блок9. Mokap.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО SOCIAL -->
+    <div class="pop-window" id="social-pop">
+        <div class="pop-header">
+            <span>SOCIAL MEDIA</span>
+            <span class="close-pop-btn" data-close="social-pop"></span>
+        </div>
+        <div class="pop-body">
+            <h2>Social Media</h2>
+            <p class="pop-desc">Креативні кампанії, креативи для соцмереж та SMM-системи.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const closeAllPops = () => {
+                document.querySelectorAll('.pop-window').forEach(w => w.classList.remove('active'));
+            };
+
+            const openPop = (id) => {
+                closeAllPops();
+                const pop = document.getElementById(id);
+                if (pop) {
+                    if (pop.classList.contains('full-screen')) {
+                        pop.style.top = '0px';
+                        pop.style.left = '0px';
+                        pop.style.transform = 'none';
+                    } else {
+                        pop.style.top = '50%';
+                        pop.style.left = '50%';
+                        pop.style.transform = 'translate(-50%, -50%)';
+                    }
+                    pop.classList.add('active');
+                }
+            };
+
+            // Прив'язка кліків до вкладок і
