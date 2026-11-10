@@ -42,7 +42,9 @@
             z-index: 10;
         }
 
-        /* ПАНЕЛЬ ВКЛАДОК: ОБМЕЖЕНО ПРАВИЙ КРАЙ ДЛЯ УНИКНЕННЯ ВИСТУПАННЯ SOCIAL */
+        /* -------------------------------------------------------------------------- */
+        /* ПАНЕЛЬ ВКЛАДОК / СХЕМА "ШАХМАТКА" (STAGGERED TABS LOGIC)                  */
+        /* -------------------------------------------------------------------------- */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -51,36 +53,64 @@
             align-items: flex-end;
             width: 100%;
             box-sizing: border-box;
-            padding-right: 22px;
+            padding-right: 18px;
+            flex-wrap: wrap; /* Дозволяє новим папкам переноситись у наступний ряд шахматкою */
+            gap: 0;
         }
 
-        .folder-tabs > *:nth-child(1) { z-index: 4; }
-        .folder-tabs > *:nth-child(2) { z-index: 3; }
-        .folder-tabs > *:nth-child(3) { z-index: 2; }
-        .folder-tabs > *:nth-child(4) { z-index: 1; }
+        /* Порядок накладання Z-Index для вкладок */
+        .folder-tabs > *:nth-child(1) { z-index: 5; }
+        .folder-tabs > *:nth-child(2) { z-index: 4; }
+        .folder-tabs > *:nth-child(3) { z-index: 3; }
+        .folder-tabs > *:nth-child(4) { z-index: 2; }
+        .folder-tabs > *:nth-child(5) { z-index: 1; }
 
-        /* БЛОК З 3 КОЛЬОРОВИМИ КОЛАМИ */
-        .controls-tab {
+        .tab-btn {
             position: relative;
-            background: rgba(230, 235, 222, 0.45);
+            background: rgba(220, 228, 212, 0.42);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: none;
-            padding: 9px 12px;
+            padding: 9px 10px;
             border-top-left-radius: 12px;
-            border-top-right-radius: 10px;
+            border-top-right-radius: 12px;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: #0c2014;
+            cursor: pointer;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            flex: 0 0 auto;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            flex: 1 1 0px;
+            min-width: 0;
+            margin-left: -8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab-btn:first-child {
+            margin-left: 0;
+        }
+
+        /* ПЕРША ВКЛАДКА З КНОПКАМИ КЕРУВАННЯ (ЗГІДНО З ЗНІМКОМ 1) */
+        .tab-btn.has-controls {
+            padding-left: 8px;
+            justify-content: flex-start;
         }
 
         .window-controls {
             display: flex;
             gap: 4px;
             flex-shrink: 0;
+            margin-right: 4px;
         }
 
         .control-btn {
@@ -94,40 +124,9 @@
         .minimize { background: #ffbd2e; border: 1px solid #dea123; }
         .maximize { background: #27c93f; border: 1px solid #1aab29; }
 
-        .tab-btn {
-            position: relative;
-            background: rgba(220, 228, 212, 0.42);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-bottom: none;
-            padding: 9px 8px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-            color: #0c2014;
-            cursor: pointer;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: all 0.2s ease;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            flex: 1 1 0px;
-            min-width: 0;
-            margin-left: -8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
         .tab-btn:hover {
             z-index: 10 !important;
-            background: rgba(240, 245, 235, 0.6);
+            background: rgba(240, 245, 235, 0.65);
         }
 
         .tab-icon {
@@ -142,6 +141,13 @@
             pointer-events: none;
             flex-shrink: 0;
         }
+
+        /* -------------------------------------------------------------------------- */
+        /* КЛАСИ ЗМІЩЕННЯ "ШАХМАТКА" ДЛЯ ДОДАВАННЯ НОВИХ ВКЛАДОК У МАЙБУТНЬОМУ       */
+        /* -------------------------------------------------------------------------- */
+        .tab-stagger-left   { margin-left: 0% !important; flex: 0 0 45%; }
+        .tab-stagger-center { margin-left: 20% !important; flex: 0 0 45%; }
+        .tab-stagger-right  { margin-left: 50% !important; flex: 0 0 45%; }
 
         .window {
             position: relative;
@@ -320,7 +326,7 @@
             opacity: 0.9;
         }
 
-        /* ПОВНОЕКРАННИЙ РЕЖИМ ДЛЯ ПРОЄКТІВ */
+        /* ПОВНОЕКРАННИЙ РЕЖИМ ДЛЯ ПРОЄКТІВ (BEHANCE STYLE) */
         .pop-window.full-screen {
             width: 100vw !important;
             height: 100vh !important;
@@ -399,13 +405,15 @@
             padding: 0;
         }
 
-        .behance-feed img {
+        .behance-feed img,
+        .behance-feed video {
             width: 100%;
             height: auto;
             display: block;
             margin: 0;
             padding: 0;
             border: none;
+            outline: none;
         }
 
         .pop-gif {
@@ -479,17 +487,14 @@
 
         @media (max-width: 520px) {
             .folder-tabs {
-                padding-right: 18px;
-            }
-            .controls-tab {
-                padding: 7px 8px;
+                padding-right: 14px;
             }
             .control-btn {
                 width: 8px;
                 height: 8px;
             }
             .tab-btn {
-                padding: 7px 3px;
+                padding: 7px 4px;
                 font-size: 0.52rem;
                 letter-spacing: 0;
                 margin-left: -6px;
@@ -516,29 +521,36 @@
     <div class="bg-overlay" onclick="closeAllPops()"></div>
 
     <div class="folder-container" id="main-folder">
+        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ -->
         <div class="folder-tabs">
-            <div class="controls-tab">
+            <!-- Вкладка 1: З 3 кольоровими точками всередині першої кнопки -->
+            <button class="tab-btn has-controls" onclick="openPop('illustration-pop')">
                 <div class="window-controls">
-                    <div class="control-btn close" onclick="closeAllPops()"></div>
+                    <div class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></div>
                     <div class="control-btn minimize"></div>
                     <div class="control-btn maximize"></div>
                 </div>
-            </div>
-
-            <button class="tab-btn" onclick="openPop('illustration-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 ILLUSTRATION
             </button>
             
+            <!-- Вкладка 2 -->
             <button class="tab-btn" onclick="openPop('branding-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                 BRANDING
             </button>
 
+            <!-- Вкладка 3 -->
             <button class="tab-btn" onclick="openPop('social-pop')">
                 <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 SOCIAL
             </button>
+
+            <!-- 
+                ПРИМІТКА ДЛЯ ДОДАВАННЯ НОВИХ ПАПОК ШАХМАТКОЙ (STAGGERED):
+                При додаванні нової кнопки <button class="tab-btn tab-stagger-left"> чи tab-stagger-center / tab-stagger-right 
+                вони автоматично ставатимуть у новий ряд зі зміщенням шахматкою.
+            -->
         </div>
 
         <div class="window">
@@ -688,107 +700,20 @@
         </div>
     </div>
 
-    <!-- ВІКНО BRANDING -->
-    <div class="pop-window" id="branding-pop">
-        <div class="pop-header">
-            <span>BRANDING</span>
+    <!-- ВІКНО BRANDING (ПОВНОЕКРАННЕ ВІКНО BEHANCE) -->
+    <div class="pop-window full-screen" id="branding-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Vorotnikova atelier | Branding</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
             <button class="close-pop-btn" onclick="closePop('branding-pop')"></button>
         </div>
-        <div class="pop-body">
-            <h2>Branding</h2>
-            <p class="pop-desc">Проєкти айдентики, пакування та дизайн-систем.</p>
-        </div>
-    </div>
-
-    <!-- ВІКНО SOCIAL -->
-    <div class="pop-window" id="social-pop">
-        <div class="pop-header">
-            <span>SOCIAL MEDIA</span>
-            <button class="close-pop-btn" onclick="closePop('social-pop')"></button>
-        </div>
-        <div class="pop-body">
-            <h2>Social Media</h2>
-            <p class="pop-desc">Креативні кампанії, креативи для соцмереж та SMM-системи.</p>
-        </div>
-    </div>
-
-    <script>
-        function openPop(id) {
-            closeAllPops();
-            const pop = document.getElementById(id);
-            if(pop) {
-                if (pop.classList.contains('full-screen')) {
-                    pop.style.top = '0';
-                    pop.style.left = '0';
-                    pop.style.transform = 'none';
-                } else {
-                    pop.style.top = '50%';
-                    pop.style.left = '50%';
-                    pop.style.transform = 'translate(-50%, -50%)';
-                }
-                pop.classList.add('active');
-            }
-        }
-
-        function closePop(id) {
-            const pop = document.getElementById(id);
-            if(pop) {
-                pop.classList.remove('active');
-            }
-        }
-
-        function closeAllPops() {
-            document.querySelectorAll('.pop-window').forEach(w => w.classList.remove('active'));
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeAllPops();
-        });
-
-        document.querySelectorAll('.pop-window').forEach(pop => {
-            const header = pop.querySelector('.pop-header');
-            let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
-
-            const startDrag = (clientX, clientY) => {
-                if (pop.classList.contains('full-screen')) return;
-                isDragging = true;
-                const rect = pop.getBoundingClientRect();
-                
-                pop.style.left = rect.left + 'px';
-                pop.style.top = rect.top + 'px';
-                pop.style.transform = 'none';
-
-                startX = clientX;
-                startY = clientY;
-                initialLeft = rect.left;
-                initialTop = rect.top;
-            };
-
-            const doDrag = (clientX, clientY) => {
-                if (!isDragging) return;
-                const dx = clientX - startX;
-                const dy = clientY - startY;
-                pop.style.left = (initialLeft + dx) + 'px';
-                pop.style.top = (initialTop + dy) + 'px';
-            };
-
-            const stopDrag = () => { isDragging = false; };
-
-            header.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
-            document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
-            document.addEventListener('mouseup', stopDrag);
-
-            header.addEventListener('touchstart', (e) => {
-                const touch = e.touches[0];
-                startDrag(touch.clientX, touch.clientY);
-            });
-            document.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const touch = e.touches[0];
-                doDrag(touch.clientX, touch.clientY);
-            });
-            document.addEventListener('touchend', stopDrag);
-        });
-    </script>
-</body>
-</html>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="logo_vorotnikova/Блок1. First.jpg" alt="Vorotnikova Atelier Block 1">
+                <img src="logo_vorotnikova/Блок2. Info. Logo.png" alt="Vorotnikova Atelier Block 2">
+                <img src="logo_vorotnikova/
