@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kate Medvid — Graphic Design Portfolio</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,27 +16,21 @@
         }
 
         body {
-            font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0f1e14;
-            background-image: url('https://lh3.googleusercontent.com/d/1jVOpeA7ibwDG003QexeKxPM8OCghFJAz');
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            background: #0f1e14 url('https://lh3.googleusercontent.com/d/1jVOpeA7ibwDG003QexeKxPM8OCghFJAz') center/cover fixed no-repeat;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            overflow-y: auto;
-            color: #0c2014;
+            overflow: hidden;
+            color: #e2e8e4;
             padding: 12px;
         }
 
         .bg-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(10, 20, 15, 0.45);
+            background: rgba(10, 20, 15, 0.4);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 1;
@@ -46,7 +39,7 @@
         .folder-container {
             position: relative;
             width: 560px;
-            max-width: 95vw;
+            max-width: 100%;
             z-index: 10;
         }
 
@@ -59,7 +52,7 @@
             align-items: flex-end;
             width: 100%;
             box-sizing: border-box;
-            padding-right: 15px;
+            padding-right: 20px;
         }
 
         .folder-tabs > *:nth-child(1) { z-index: 4; }
@@ -69,8 +62,10 @@
 
         .tab-btn {
             position: relative;
-            background: #cbd8c3;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(220, 228, 212, 0.42);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: none;
             padding: 9px 6px;
             border-top-left-radius: 12px;
@@ -87,10 +82,10 @@
             justify-content: center;
             gap: 4px;
             transition: all 0.2s ease;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.12);
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
             flex: 1 1 0px;
             min-width: 0;
-            margin-left: -6px;
+            margin-left: -8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -126,7 +121,7 @@
 
         .tab-btn:hover {
             z-index: 10 !important;
-            background: #e1ecd8;
+            background: rgba(240, 245, 235, 0.65);
         }
 
         .tab-icon {
@@ -144,11 +139,14 @@
 
         .window {
             position: relative;
-            background: #d5e0cd;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(230, 235, 222, 0.32);
+            backdrop-filter: blur(25px) saturate(140%);
+            -webkit-backdrop-filter: blur(25px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 20px;
             border-top-left-radius: 0px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.6);
             overflow: hidden;
             z-index: 1;
             width: 100%;
@@ -179,7 +177,7 @@
         }
 
         .hero-title {
-            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 4.2rem;
             font-weight: 300;
             color: #0e3019;
@@ -212,10 +210,10 @@
             font-family: 'Bricolage Grotesque', sans-serif;
             color: #09170e;
             text-decoration: none;
-            background: #edf4e8;
+            background: rgba(255, 255, 255, 0.45);
             padding: 5px 12px;
             border-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.2s;
             cursor: pointer;
             font-size: 0.75rem;
@@ -245,10 +243,12 @@
             max-width: 94vw;
             max-height: 85vh;
             z-index: 100;
-            background: #eef3ea;
+            background: rgba(235, 240, 230, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
             overflow: hidden;
         }
 
@@ -262,7 +262,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            background: #dce7d5;
+            background: rgba(255, 255, 255, 0.45);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             font-size: 0.8rem;
             font-weight: 700;
@@ -298,7 +298,7 @@
         }
 
         .pop-body h2 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             font-weight: 300;
             margin-bottom: 6px;
@@ -325,7 +325,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 18px;
-            background: #e6eae1;
+            background: rgba(245, 247, 242, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             cursor: default;
             position: sticky;
@@ -465,7 +467,7 @@
 
         @media (max-width: 520px) {
             .folder-tabs {
-                padding-right: 10px;
+                padding-right: 14px;
             }
             .control-btn {
                 width: 8px;
@@ -475,7 +477,7 @@
                 padding: 7px 3px;
                 font-size: 0.48rem;
                 letter-spacing: 0;
-                margin-left: -4px;
+                margin-left: -5px;
             }
             .tab-icon {
                 width: 10px;
@@ -664,12 +666,12 @@
         </div>
         <div class="pop-body project-body">
             <div class="behance-feed">
-                <img src="ai/01_Mokap_ai.jpg" alt="Vertical Movies Poster 1">
-                <img src="ai/02_Mokap_ai.jpg" alt="Vertical Movies Poster 2">
-                <img src="ai/03_Mokap_ai.jpg" alt="Vertical Movies Poster 3">
-                <img src="ai/04_Mokap_ai.jpg" alt="Vertical Movies Poster 4">
-                <img src="ai/05_Mokap_ai.jpg" alt="Vertical Movies Poster 5">
-                <img src="ai/06_Mokap_ai.jpg" alt="Vertical Movies Poster 6">
+                <img src="ai/01_Mokap_ai.jpg" onerror="this.onerror=null; this.src='01_Mokap_ai.jpg';" alt="Vertical Movies Poster 1">
+                <img src="ai/02_Mokap_ai.jpg" onerror="this.onerror=null; this.src='02_Mokap_ai.jpg';" alt="Vertical Movies Poster 2">
+                <img src="ai/03_Mokap_ai.jpg" onerror="this.onerror=null; this.src='03_Mokap_ai.jpg';" alt="Vertical Movies Poster 3">
+                <img src="ai/04_Mokap_ai.jpg" onerror="this.onerror=null; this.src='04_Mokap_ai.jpg';" alt="Vertical Movies Poster 4">
+                <img src="ai/05_Mokap_ai.jpg" onerror="this.onerror=null; this.src='05_Mokap_ai.jpg';" alt="Vertical Movies Poster 5">
+                <img src="ai/06_Mokap_ai.jpg" onerror="this.onerror=null; this.src='06_Mokap_ai.jpg';" alt="Vertical Movies Poster 6">
             </div>
         </div>
     </div>
