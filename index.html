@@ -202,23 +202,17 @@
         .minimize { background: #ffbd2e; border: 1px solid #dea123; }
         .maximize { background: #27c93f; border: 1px solid #1aab29; }
 
-        /* Іконки: товщина лінії збігається з товщиною штрихів жирного тексту поряд.
-           non-scaling-stroke робить товщину в реальних пікселях, незалежно від масштабу іконки. */
         .tab-icon {
             width: 10px;
             height: 10px;
             stroke: #0c2014;
-            stroke-width: 1.3px;
+            stroke-width: 1.8;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 1;
+            opacity: 0.85;
             pointer-events: none;
             flex-shrink: 0;
-        }
-
-        .tab-icon * {
-            vector-effect: non-scaling-stroke;
         }
 
         .window {
@@ -332,6 +326,7 @@
             width: 600px;
             max-width: 94vw;
             max-height: 85vh;
+            max-height: 85dvh;
             z-index: 100;
             background: rgba(235, 240, 230, 0.96);
             backdrop-filter: blur(25px);
@@ -384,6 +379,11 @@
             text-align: left;
             user-select: text;
             -webkit-overflow-scrolling: touch;
+        }
+
+        /* додатковий простір унизу блоку About, щоб останній рядок не ховався під панеллю браузера */
+        #about-pop .pop-body {
+            padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
         }
 
         .pop-body::-webkit-scrollbar {
@@ -571,6 +571,9 @@
             .hero-title { font-size: 3.2rem; }
             .window-body { padding: 22px 16px; }
             .pop-body { padding: 18px 14px; }
+            #about-pop .pop-body {
+                padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            }
             .pop-body.project-body { padding: 0; }
             .project-title-text strong { font-size: 0.78rem; }
             .project-title-text span { font-size: 0.68rem; }
