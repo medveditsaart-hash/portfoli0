@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Kate Medvid — Graphic Design Portfolio</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
@@ -15,16 +15,26 @@
             user-select: none;
         }
 
+        /* Запасний градієнт показується, якщо Paris_love.jpg не завантажилась */
         body {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            background: #0f1e14 url('Paris_love.jpg') center/cover fixed no-repeat;
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
+            background:
+                url('Paris_love.jpg') center/cover fixed no-repeat,
+                linear-gradient(135deg, #8fae96 0%, #4f7a5c 50%, #2a4a35 100%);
+            background-color: #4f7a5c;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            align-items: flex-start;
+            overflow-x: hidden;
+            overflow-y: auto;
             color: #e2e8e4;
             padding: 12px;
+        }
+
+        body.pop-open {
+            overflow: hidden;
         }
 
         .bg-overlay {
@@ -40,6 +50,7 @@
             position: relative;
             width: 560px;
             max-width: 100%;
+            margin: auto;
             z-index: 10;
         }
 
@@ -62,7 +73,7 @@
 
         .tab-btn {
             position: relative;
-            background: rgba(220, 228, 212, 0.42);
+            background: rgba(220, 228, 212, 0.62);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -70,7 +81,7 @@
             padding: 9px 8px;
             border-top-left-radius: 12px;
             border-top-right-radius: 12px;
-            font-family: 'Bricolage Grotesque', sans-serif;
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
             font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 0.3px;
@@ -121,7 +132,7 @@
 
         .tab-btn:hover {
             z-index: 10 !important;
-            background: rgba(240, 245, 235, 0.65);
+            background: rgba(240, 245, 235, 0.8);
         }
 
         .tab-icon {
@@ -139,7 +150,7 @@
 
         .window {
             position: relative;
-            background: rgba(230, 235, 222, 0.32);
+            background: rgba(230, 235, 222, 0.5);
             backdrop-filter: blur(25px) saturate(140%);
             -webkit-backdrop-filter: blur(25px) saturate(140%);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -177,7 +188,7 @@
         }
 
         .hero-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 4.2rem;
             font-weight: 300;
             color: #0e3019;
@@ -186,7 +197,7 @@
         }
 
         .hero-subtitle {
-            font-family: 'Bricolage Grotesque', sans-serif;
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
             font-size: 1.05rem;
             letter-spacing: 2.5px;
             color: #122b1c;
@@ -207,10 +218,687 @@
         }
 
         .footer-btn, .contacts-links a {
-            font-family: 'Bricolage Grotesque', sans-serif;
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
             color: #09170e;
             text-decoration: none;
             background: rgba(255, 255, 255, 0.45);
             padding: 6px 14px;
             border-radius: 6px;
-            border: 1px solid rgba
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.2s;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-btn:hover, .contacts-links a:hover {
+            background: #0e3019;
+            color: #f0f5ed;
+        }
+
+        .contacts-links a {
+            margin-left: 6px;
+        }
+
+        /* POPUP WINDOWS */
+        .pop-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            max-width: 94vw;
+            max-height: 85vh;
+            z-index: 100;
+            background: rgba(235, 240, 230, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .pop-window.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.45);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0c2014;
+            cursor: move;
+            flex-shrink: 0;
+        }
+
+        .close-pop-btn {
+            background: #ff5f56;
+            border: 1px solid #e0443e;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .pop-body {
+            padding: 20px 24px;
+            color: #122b1c;
+            overflow-y: auto;
+            text-align: left;
+            user-select: text;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pop-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .pop-body::-webkit-scrollbar-thumb {
+            background: rgba(18, 43, 28, 0.3);
+            border-radius: 3px;
+        }
+
+        .pop-body h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 12px;
+            color: #0e3019;
+            text-align: center;
+        }
+
+        /* ПОВНОЕКРАННИЙ РЕЖИМ (BEHANCE STYLE) */
+        .pop-window.full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            max-height: 100dvh !important;
+            top: 0 !important;
+            left: 0 !important;
+            transform: none !important;
+            border-radius: 0 !important;
+            border: none !important;
+            background: #f4f5f1;
+        }
+
+        .pop-header.project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            background: rgba(245, 247, 242, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            cursor: default;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .project-author-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .project-title-text strong {
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0c2014;
+            line-height: 1.2;
+        }
+
+        .project-title-text span {
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
+            font-size: 0.74rem;
+            color: #4a5d50;
+            font-weight: 500;
+        }
+
+        .pop-body.project-body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        /* НАДІЙНИЙ НИЖНІЙ ВІДСТУП ДЛЯ МОБІЛЬНОГО CHROME / SAFARI */
+        .behance-feed {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+            padding-bottom: calc(100px + env(safe-area-inset-bottom));
+        }
+
+        .behance-feed img,
+        .behance-feed video {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
+        .pop-gif {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            margin: 0 auto 18px auto;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .about-summary {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 24px;
+            color: #183624;
+        }
+
+        .section-title {
+            font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #0e3019;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(14, 48, 25, 0.2);
+            padding-bottom: 6px;
+            margin: 20px 0 12px 0;
+        }
+
+        .skills-list {
+            list-style: none;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .skills-list li {
+            margin-bottom: 4px;
+        }
+
+        .job-item {
+            margin-bottom: 18px;
+        }
+
+        .job-header {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0e3019;
+        }
+
+        .job-desc {
+            list-style: disc;
+            padding-left: 18px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            margin-top: 6px;
+            color: #21422f;
+        }
+
+        .job-desc li {
+            margin-bottom: 4px;
+        }
+
+        .edu-item, .lang-item {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        /* СТАБІЛЬНА МОБІЛЬНА СІТКА 2х2 ДЛЯ ВКЛАДОК ПАПОК */
+        @media (max-width: 600px) {
+            .folder-container {
+                padding-top: 4px;
+            }
+            .folder-tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+                padding-right: 0;
+                top: 0;
+            }
+            .tab-btn {
+                margin-left: 0 !important;
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                border-radius: 10px;
+                padding: 10px 8px;
+                font-size: 0.65rem;
+                letter-spacing: 0.2px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+                justify-content: center;
+                width: 100%;
+            }
+            .tab-btn.has-controls {
+                padding-left: 10px;
+                justify-content: flex-start;
+            }
+            .window {
+                border-top-left-radius: 20px;
+                margin-top: 8px;
+            }
+            .control-btn {
+                width: 9px;
+                height: 9px;
+            }
+            .tab-icon {
+                width: 11px;
+                height: 11px;
+            }
+            .hero-title { font-size: 3.2rem; }
+            .window-body { padding: 22px 16px; }
+            .pop-body { padding: 18px 14px; }
+            .pop-body.project-body { padding: 0; }
+            .project-title-text strong { font-size: 0.78rem; }
+            .project-title-text span { font-size: 0.68rem; }
+            .project-author-avatar { width: 30px; height: 30px; }
+            .footer-btn, .contacts-links a {
+                padding: 5px 10px;
+                font-size: 0.68rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay" onclick="closeAllPops()"></div>
+
+    <div class="folder-container" id="main-folder">
+        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ (BRANDING ПЕРШИЙ) -->
+        <div class="folder-tabs">
+            <!-- Вкладка 1: BRANDING (З КНОПКАМИ КЕРУВАННЯ) -->
+            <button type="button" class="tab-btn has-controls" onclick="openPop('branding-pop')">
+                <span class="window-controls">
+                    <span class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></span>
+                    <span class="control-btn minimize" onclick="event.stopPropagation()"></span>
+                    <span class="control-btn maximize" onclick="event.stopPropagation()"></span>
+                </span>
+                <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                BRANDING
+            </button>
+
+            <!-- Вкладка 2: AI-POSTERS -->
+            <button type="button" class="tab-btn" onclick="openPop('ai-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                AI-POSTERS
+            </button>
+
+            <!-- Вкладка 3: ILLUSTRATION -->
+            <button type="button" class="tab-btn" onclick="openPop('illustration-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                ILLUSTRATION
+            </button>
+
+            <!-- Вкладка 4: SOCIAL -->
+            <button type="button" class="tab-btn" onclick="openPop('social-pop')">
+                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                SOCIAL
+            </button>
+        </div>
+
+        <div class="window">
+            <div class="window-body">
+                <div class="meta-info">
+                    <span>LOCATION: KYIV, UKRAINE</span>
+                </div>
+
+                <h1 class="hero-title">Kate<br>Medvid</h1>
+
+                <div class="divider-line"></div>
+
+                <p class="hero-subtitle">Graphic Design</p>
+
+                <div class="window-footer">
+                    <button type="button" class="footer-btn" onclick="openPop('about-pop')">ABOUT</button>
+                    <div class="contacts-links">
+                        <a href="mailto:medveditsa.art@gmail.com">Email</a>
+                        <a href="https://www.linkedin.com/in/medveditsaart/" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО ABOUT ME -->
+    <div class="pop-window" id="about-pop">
+        <div class="pop-header">
+            <span>ABOUT ME</span>
+            <button type="button" class="close-pop-btn" onclick="closePop('about-pop')" aria-label="Close"></button>
+        </div>
+        <div class="pop-body">
+            <h2>Kate Medvid</h2>
+
+            <img src="me.gif" alt="Kate Medvid" class="pop-gif">
+
+            <p class="about-summary">
+                Senior Graphic Designer with 10 years of experience in brand identity, social-first creative, and AI-assisted visual production. Skilled at building scalable brand systems for media channels reaching 3M+ audience across the U.S. and European markets. Combines strong typography and composition fundamentals with hands-on expertise in AI image generation to deliver high-volume creative output at consistent brand quality.
+            </p>
+
+            <div class="section-title">TECHNICAL SKILLS</div>
+            <ul class="skills-list">
+                <li><strong>Design Tools:</strong> Figma, Adobe Photoshop, Illustrator, InDesign, Canva</li>
+                <li><strong>Motion &amp; Video:</strong> Adobe After Effects, Premiere Pro</li>
+                <li><strong>AI Tools:</strong> Midjourney, Adobe Firefly, ChatGPT, Gemini, Claude</li>
+                <li><strong>Other:</strong> Pre-press, Typography, Color Theory, Jira, Trello, Slack, Tilda, WIX</li>
+            </ul>
+
+            <div class="section-title">WORK EXPERIENCE</div>
+
+            <div class="job-item">
+                <div class="job-header">Genesis, AMO — Senior Graphic Designer | June 2021 – July 2026</div>
+                <ul class="job-desc">
+                    <li>Developed visual identity and creative systems for 10+ social media channels (Meta, TikTok, YouTube, Snapchat) targeting U.S. and European audiences, contributing to combined reach of 3M+ followers across platforms.</li>
+                    <li>Designed AI-assisted key art and poster series for a vertical-drama streaming platform, maintaining consistent characters and visual style across a multi-episode content library for B2B clients.</li>
+                    <li>Designed presentations and sales decks for the sales team, supporting deal closures.</li>
+                    <li>Led and reviewed work of 3 junior designers, maintaining consistent quality and creative standards across the team's output.</li>
+                    <li>Participated in and led one of the teams working on new YouTube projects within the company.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">1+1 media — Middle Graphic Designer | June 2019 – June 2021</div>
+                <ul class="job-desc">
+                    <li>Developed brand books and visual identity guidelines for internal company products, ensuring consistency across all touchpoints.</li>
+                    <li>Retouched and prepared photos of actors and TV hosts for further animation and use in broadcast graphics.</li>
+                    <li>Collaborated with the Marketing Department to develop a consistent tone of voice and visual identity for social media.</li>
+                    <li>Served as the lead designer for the website’s visual, as well as for organizational and promotional materials, from concept through launch, for the 1+1 Digital Weekend 2020 conference.</li>
+                    <li>Designed creative landing pages for informational products, focusing on visual storytelling and user engagement.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">PlusOne DA — Middle Graphic Designer | May 2018 – May 2019</div>
+                <ul class="job-desc">
+                    <li>Created frame-by-frame graphic illustrations and storyboard visuals for video content for clients such as DTEK and Bogdan Corporation.</li>
+                    <li>Designed custom sticker packs and digital assets optimized for social media and messaging platforms.</li>
+                    <li>Developed creative concepts and visual materials for political and pre-election campaigns, focusing on clear communication and audience engagement.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">FASHION-PR — Graphic Designer | July 2017 – April 2018</div>
+                <ul class="job-desc">
+                    <li>Developed and executed social media promotional campaigns for major international brands, including Conte, Lacoste, Liska, Marks &amp; Spencer, English Home, and Unice.</li>
+                    <li>Created print-ready layouts and marketing materials for two large-scale branded events: the launch of Lacoste's new collection in Odesa and the Fashionology in-person conference in Kyiv.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">Kyiv Academic Youth Theatre — Graphic Designer | August 2016 – July 2017</div>
+                <ul class="job-desc">
+                    <li>Designing posters and handouts for theater productions (Pre-press).</li>
+                    <li>Designing banners and billboards for outdoor advertising in the city.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">Freelance Graphic Designer | April 2016 – Present</div>
+                <ul class="job-desc">
+                    <li>Retouched and processed over 500+ images for e-commerce catalogs.</li>
+                    <li>Designed original prints and graphic patterns for clothing collections, aligning with brand identity and seasonal trends.</li>
+                    <li>Designed book covers and handled layout/typesetting, ensuring visually compelling and print-ready publications.</li>
+                    <li>Designed music album cover artworks.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">EDUCATION</div>
+            <div class="edu-item"><strong>Bachelor’s Degree in Engineering Technology</strong> — KNUTD, Kyiv | 2011</div>
+            <div class="edu-item"><strong>Master's Degree in Design / Fine Arts</strong> — KNUTD, Kyiv | 2013</div>
+            <div class="edu-item"><strong>Illustration Pro</strong> — Projector Institute, Kyiv | 2021</div>
+            <div class="edu-item"><strong>Motion Design Beginning</strong> — Projector Institute, Kyiv | 2022</div>
+            <div class="edu-item"><strong>Work with Figma</strong> — Cases, Kyiv | 2023</div>
+
+            <div class="section-title">LANGUAGES</div>
+            <div class="lang-item"><strong>Ukrainian</strong> — Native</div>
+            <div class="lang-item"><strong>English</strong> — Upper-Intermediate</div>
+            <div class="lang-item"><strong>Portuguese</strong> — Elementary</div>
+        </div>
+    </div>
+
+    <!-- ВІКНО BRANDING -->
+    <div class="pop-window full-screen" id="branding-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Vorotnikova atelier | Branding</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <button type="button" class="close-pop-btn" onclick="closePop('branding-pop')" aria-label="Close"></button>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="logo_vorotnikova/vorotnikova_1.jpg" alt="Vorotnikova Atelier 1" loading="lazy">
+                <img src="logo_vorotnikova/vorotnikova_2.png" alt="Vorotnikova Atelier 2" loading="lazy">
+                <img src="logo_vorotnikova/vorotnikova_3.jpg" alt="Vorotnikova Atelier 3" loading="lazy">
+                <img src="logo_vorotnikova/vorotnikova_4.jpg" alt="Vorotnikova Atelier 4" loading="lazy">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="logo_vorotnikova/vorotnikova_5.mp4" type="video/mp4">
+                </video>
+                <img src="logo_vorotnikova/vorotnikova_6.jpg" alt="Vorotnikova Atelier 6" loading="lazy">
+                <img src="logo_vorotnikova/vorotnikova_7.jpg" alt="Vorotnikova Atelier 7" loading="lazy">
+                <img src="logo_vorotnikova/vorotnikova_8.jpg" alt="Vorotnikova Atelier 8" loading="lazy">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="logo_vorotnikova/vorotnikova_9.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО AI POSTERS -->
+    <div class="pop-window full-screen" id="ai-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Vertical movies posters | AI Posters</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <button type="button" class="close-pop-btn" onclick="closePop('ai-pop')" aria-label="Close"></button>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="ai/01_Mokup_ai.jpg" alt="Vertical Movies Poster 1" loading="lazy">
+                <img src="ai/02_Mokup_ai.jpg" alt="Vertical Movies Poster 2" loading="lazy">
+                <img src="ai/03_Mokup_ai.jpg" alt="Vertical Movies Poster 3" loading="lazy">
+                <img src="ai/04_Mokup_ai.jpg" alt="Vertical Movies Poster 4" loading="lazy">
+                <img src="ai/05_Mokup_ai.jpg" alt="Vertical Movies Poster 5" loading="lazy">
+                <img src="ai/06_Mokup_ai.jpg" alt="Vertical Movies Poster 6" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО ILLUSTRATION -->
+    <div class="pop-window full-screen" id="illustration-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>Little Wild Things | Illustrated Book</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <button type="button" class="close-pop-btn" onclick="closePop('illustration-pop')" aria-label="Close"></button>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="illustration_book/1_Book_Mockup_cover.jpg" alt="Little Wild Things 1" loading="lazy">
+                <img src="illustration_book/2_Book_Text.jpg" alt="Little Wild Things 2" loading="lazy">
+                <img src="illustration_book/3_Book_Mockup.jpg" alt="Little Wild Things 3" loading="lazy">
+                <img src="illustration_book/4_Book_fonts.jpg" alt="Little Wild Things 4" loading="lazy">
+                <img src="illustration_book/5_Book_Mockup.jpg" alt="Little Wild Things 5" loading="lazy">
+                <img src="illustration_book/6_Book_chess.jpg" alt="Little Wild Things 6" loading="lazy">
+                <img src="illustration_book/7_Book_Mockup.jpg" alt="Little Wild Things 7" loading="lazy">
+                <img src="illustration_book/8_Book_Mockup.jpg" alt="Little Wild Things 8" loading="lazy">
+                <img src="illustration_book/9_Book_Mockup.jpg" alt="Little Wild Things 9" loading="lazy">
+                <img src="illustration_book/91_Book_Page.jpg" alt="Little Wild Things 91" loading="lazy">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="illustration_book/92_Book_Video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВІКНО SOCIAL -->
+    <div class="pop-window full-screen" id="social-pop">
+        <div class="pop-header project-header">
+            <div class="project-author-info">
+                <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
+                <div class="project-title-text">
+                    <strong>ZaNovo creative post | Social</strong>
+                    <span>Kate Medvid</span>
+                </div>
+            </div>
+            <button type="button" class="close-pop-btn" onclick="closePop('social-pop')" aria-label="Close"></button>
+        </div>
+        <div class="pop-body project-body">
+            <div class="behance-feed">
+                <img src="Social/zanovo/social_1_1.jpg" alt="ZaNovo Creative Post 1" loading="lazy">
+                <img src="Social/zanovo/social_1_3.jpg" alt="ZaNovo Creative Post 3" loading="lazy">
+                <img src="Social/zanovo/social_1_2.jpg" alt="ZaNovo Creative Post 2" loading="lazy">
+                <img src="Social/zanovo/social_1_4.gif" alt="ZaNovo Creative Post 4" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateBodyLock() {
+            const anyOpen = document.querySelector('.pop-window.active') !== null;
+            document.body.classList.toggle('pop-open', anyOpen);
+        }
+
+        function pauseVideos(pop) {
+            pop.querySelectorAll('video').forEach(v => {
+                try { v.pause(); } catch (e) {}
+            });
+        }
+
+        function openPop(id) {
+            closeAllPops();
+            const pop = document.getElementById(id);
+            if (pop) {
+                // Скидання відносного позиціонування перетягування при відкритті
+                pop.style.left = '';
+                pop.style.top = '';
+                pop.style.transform = '';
+                pop.classList.add('active');
+                pop.querySelectorAll('video').forEach(v => {
+                    const p = v.play();
+                    if (p && p.catch) p.catch(() => {});
+                });
+                const body = pop.querySelector('.pop-body');
+                if (body) body.scrollTop = 0;
+            }
+            updateBodyLock();
+        }
+
+        function closePop(id) {
+            const pop = document.getElementById(id);
+            if (pop) {
+                pop.classList.remove('active');
+                pauseVideos(pop);
+            }
+            updateBodyLock();
+        }
+
+        function closeAllPops() {
+            document.querySelectorAll('.pop-window').forEach(w => {
+                w.classList.remove('active');
+                pauseVideos(w);
+            });
+            updateBodyLock();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllPops();
+        });
+
+        document.querySelectorAll('.pop-window').forEach(pop => {
+            const header = pop.querySelector('.pop-header');
+            if (!header) return;
+
+            let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
+
+            const startDrag = (clientX, clientY) => {
+                if (pop.classList.contains('full-screen')) return;
+                isDragging = true;
+                const rect = pop.getBoundingClientRect();
+
+                pop.style.left = rect.left + 'px';
+                pop.style.top = rect.top + 'px';
+                pop.style.transform = 'none';
+
+                startX = clientX;
+                startY = clientY;
+                initialLeft = rect.left;
+                initialTop = rect.top;
+            };
+
+            const doDrag = (clientX, clientY) => {
+                if (!isDragging) return;
+                pop.style.left = (initialLeft + clientX - startX) + 'px';
+                pop.style.top = (initialTop + clientY - startY) + 'px';
+            };
+
+            const stopDrag = () => { isDragging = false; };
+
+            header.addEventListener('mousedown', (e) => {
+                if (e.target.closest('.close-pop-btn')) return;
+                startDrag(e.clientX, e.clientY);
+            });
+            document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+            document.addEventListener('mouseup', stopDrag);
+
+            header.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.close-pop-btn')) return;
+                const touch = e.touches[0];
+                startDrag(touch.clientX, touch.clientY);
+            }, { passive: true });
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                doDrag(touch.clientX, touch.clientY);
+            }, { passive: true });
+            document.addEventListener('touchend', stopDrag);
+        });
+    </script>
+</body>
+</html>
