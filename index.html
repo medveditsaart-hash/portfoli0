@@ -59,9 +59,11 @@
             --paper-back: rgba(190, 204, 182, 0.94);
             --paper-front: rgba(214, 223, 208, 0.94);
             --paper-line: rgba(255, 255, 255, 0.55);
-            --tab-overlap: 12px;   /* наскільки вкладки заходять одна під одну */
+            --tab-overlap: 12px;     /* наскільки вкладки заходять одна під одну */
             --tab-radius: 12px;
-            --back-tuck: 14px;     /* наскільки задні вкладки заходять під передні */
+            --back-tuck: 14px;       /* наскільки задні вкладки заходять під передні */
+            --tab-inset: 12px;       /* наскільки задній ряд вужчий за передній з кожного боку */
+            --window-radius: 20px;   /* має збігатися з border-radius вікна */
         }
 
         /* ПАПКА: ДВА РЯДИ ВКЛАДОК (ЗАДНІЙ І ПЕРЕДНІЙ) */
@@ -71,6 +73,7 @@
             flex-direction: column;
             top: 1px;
             width: 100%;
+            padding-right: var(--window-radius); /* передній ряд закінчується там, де починається заокруглення вікна */
         }
 
         .tabs-row {
@@ -79,11 +82,12 @@
             width: 100%;
         }
 
-        /* задній ряд заходить під передній, щоб не було прогалин у кутах */
+        /* задній ряд вужчий і заходить під передній, щоб не було прогалин і гострих кутів */
         .tabs-back {
             position: relative;
             z-index: 1;
             margin-bottom: calc(var(--back-tuck) * -1);
+            padding: 0 var(--tab-inset);
         }
 
         .tabs-front {
@@ -131,20 +135,17 @@
             text-overflow: ellipsis;
         }
 
-        /* Порядок накладання строго зліва направо:
-           кожна наступна вкладка лежить поверх попередньої */
+        /* Накладання: ліва вкладка зверху, кожна наступна під нею */
         .tabs-row .tab-btn + .tab-btn {
             margin-left: calc(var(--tab-overlap) * -1);
         }
-        .tabs-row .tab-btn:nth-child(1) { z-index: 1; }
+        .tabs-row .tab-btn:nth-child(1) { z-index: 3; }
         .tabs-row .tab-btn:nth-child(2) { z-index: 2; }
-        .tabs-row .tab-btn:nth-child(3) { z-index: 3; }
+        .tabs-row .tab-btn:nth-child(3) { z-index: 1; }
 
-        /* відступи, щоб напис був по центру ВИДИМОЇ частини вкладки
-           (враховуємо ділянки, де вкладки перекриваються) */
+        /* напис по центру видимої частини: прикрита лише ліва частина вкладки */
         .tabs-row .tab-btn { padding-left: 6px; padding-right: 6px; }
         .tabs-row .tab-btn:not(:first-child) { padding-left: calc(var(--tab-overlap) + 6px); }
-        .tabs-row .tab-btn:not(:last-child)  { padding-right: calc(var(--tab-overlap) + 6px); }
 
         /* задні вкладки */
         .tabs-back .tab-btn {
@@ -164,7 +165,7 @@
         .tabs-front .tab-btn.has-controls {
             justify-content: flex-start;
             background: var(--paper);
-            padding: 13px calc(var(--tab-overlap) + 6px) 12px 12px;
+            padding: 13px 6px 12px 12px;
             margin-bottom: -1px;
         }
 
@@ -220,7 +221,7 @@
             backdrop-filter: blur(25px) saturate(140%);
             -webkit-backdrop-filter: blur(25px) saturate(140%);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
+            border-radius: var(--window-radius);
             border-top-left-radius: 0px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45),
                         inset 0 1px 1px rgba(255, 255, 255, 0.6);
