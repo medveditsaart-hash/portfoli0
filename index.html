@@ -78,8 +78,8 @@
         .tabs-back {
             position: relative;
             z-index: 1;
-            padding-left: 16px;
-            padding-right: 26px;
+            padding-left: 0;
+            padding-right: 0;
             margin-bottom: -1px;
         }
 
@@ -93,22 +93,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             min-width: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
             font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.58rem;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             text-transform: uppercase;
             color: #0c2014;
             border: 1px solid var(--paper-line);
             border-bottom: none;
-            border-top-left-radius: 14px;
-            border-top-right-radius: 14px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             transition: filter 0.2s ease;
@@ -118,55 +118,54 @@
             filter: brightness(1.12);
         }
 
-        /* задні вкладки: вищі й трохи темніші */
+        /* задні вкладки: 3 штуки однакового розміру */
         .tabs-back .tab-btn {
             background: var(--paper-back);
-            padding: 9px 10px 14px 10px;
+            padding: 9px 6px 14px 6px;
             flex: 1 1 0;
+            margin-left: -6px;
         }
-        .tabs-back .tab-btn + .tab-btn {
-            margin-left: -10px;
-            padding-left: 18px;
+        .tabs-back .tab-btn:first-child {
+            margin-left: 0;
         }
-        .tabs-back .tab-btn:first-child { flex: 1.35 1 0; }
 
-        /* передні вкладки */
+        /* передні вкладки: 3 штуки однакового розміру */
         .tabs-front .tab-btn {
             background: var(--paper);
-            padding: 10px 8px;
+            padding: 10px 6px;
             flex: 1 1 0;
-            margin-left: -10px;
+            margin-left: -6px;
         }
-        .tabs-front .tab-btn:first-child { margin-left: 0; }
+        .tabs-front .tab-btn:first-child { 
+            margin-left: 0; 
+        }
 
         /* перша передня вкладка (зі «світлофором») зливається з корпусом папки */
         .tabs-front .tab-btn.has-controls {
-            flex: 1.9 1 0;
             justify-content: flex-start;
-            padding: 13px 10px 12px 12px;
+            padding: 13px 6px 12px 8px;
             margin-bottom: -1px;
             z-index: 3;
         }
 
-        /* друга передня вкладка — нижча, з лінією краю папки під нею */
+        /* інші передні вкладки */
         .tabs-front .tab-btn:not(.has-controls) {
             border-bottom: 1px solid var(--paper-line);
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
             padding-top: 8px;
-            padding-left: 18px;
         }
 
         .window-controls {
             display: inline-flex;
-            gap: 4px;
+            gap: 3px;
             flex-shrink: 0;
-            margin-right: 4px;
+            margin-right: 2px;
         }
 
         .control-btn {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             cursor: pointer;
             display: inline-block;
@@ -177,8 +176,8 @@
         .maximize { background: #27c93f; border: 1px solid #1aab29; }
 
         .tab-icon {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             stroke: #0c2014;
             stroke-width: 1.8;
             fill: none;
@@ -216,14 +215,14 @@
             font-weight: 700;
             letter-spacing: 1.5px;
             color: #122b1c;
-            border-bottom: 1px dashed rgba(18, 43, 28, 0.3);
+            border-bottom: 1px solid rgba(18, 43, 28, 0.3);
             padding-bottom: 12px;
             margin-bottom: 24px;
             text-transform: uppercase;
         }
 
         .divider-line {
-            border-bottom: 1px dashed rgba(18, 43, 28, 0.3);
+            border-bottom: 1px solid rgba(18, 43, 28, 0.3);
             margin: 28px 0;
             width: 100%;
         }
@@ -544,19 +543,23 @@
     <div class="folder-container" id="main-folder">
         <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ -->
         <div class="folder-tabs">
-            <!-- ЗАДНІЙ РЯД -->
+            <!-- ЗАДНІЙ РЯД (3 вкладки) -->
             <div class="tabs-row tabs-back">
-                <button type="button" class="tab-btn" onclick="openPop('illustration-pop')">
-                    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                    ILLUSTRATION
-                </button>
                 <button type="button" class="tab-btn" onclick="openPop('social-pop')">
                     <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     SOCIAL
                 </button>
+                <button type="button" class="tab-btn" onclick="openPop('youtube-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0c2014"></polygon></svg>
+                    YOUTUBE
+                </button>
+                <button type="button" class="tab-btn" onclick="openPop('events-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    EVENTS
+                </button>
             </div>
 
-            <!-- ПЕРЕДНІЙ РЯД -->
+            <!-- ПЕРЕДНІЙ РЯД (3 вкладки) -->
             <div class="tabs-row tabs-front">
                 <button type="button" class="tab-btn has-controls" onclick="openPop('branding-pop')">
                     <span class="window-controls">
@@ -566,6 +569,10 @@
                     </span>
                     <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                     BRANDING
+                </button>
+                <button type="button" class="tab-btn" onclick="openPop('illustration-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    ILLUSTRATION
                 </button>
                 <button type="button" class="tab-btn" onclick="openPop('ai-pop')">
                     <svg class="tab-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
@@ -623,7 +630,7 @@
             <div class="section-title">WORK EXPERIENCE</div>
 
             <div class="job-item">
-                <div class="job-header">Genesis, AMO — Senior Graphic Designer | <em>June 2021 – July 2026</em></div>
+                <div class="job-header">Genesis, AMO - Senior Graphic Designer | <em>June 2021 – July 2026</em></div>
                 <ul class="job-desc">
                     <li>Developed <strong>visual identity and creative systems</strong> for 10+ social media channels (Meta, TikTok, YouTube, Snapchat) targeting U.S. and European audiences, contributing to combined reach of 3M+ followers across platforms.</li>
                     <li>Designed <strong>AI-assisted key art</strong> and poster series for a vertical-drama streaming platform, maintaining consistent characters and visual style across a multi-episode content library for B2B clients.</li>
@@ -634,7 +641,7 @@
             </div>
 
             <div class="job-item">
-                <div class="job-header">1+1 media — Middle Graphic Designer | <em>June 2019 – June 2021</em></div>
+                <div class="job-header">1+1 media - Middle Graphic Designer | <em>June 2019 – June 2021</em></div>
                 <ul class="job-desc">
                     <li>Developed <strong>brand books</strong> and <strong>visual identity guidelines</strong> for internal company products, ensuring consistency across all touchpoints.</li>
                     <li><strong>Retouched and prepared photos</strong> of actors and TV hosts for further animation and use in broadcast graphics.</li>
@@ -645,7 +652,7 @@
             </div>
 
             <div class="job-item">
-                <div class="job-header">PlusOne DA — Middle Graphic Designer | <em>May 2018 – May 2019</em></div>
+                <div class="job-header">PlusOne DA - Middle Graphic Designer | <em>May 2018 – May 2019</em></div>
                 <ul class="job-desc">
                     <li>Created frame-by-frame <strong>graphic illustrations</strong> and storyboard visuals for video content for clients such as DTEK and Bogdan Corporation.</li>
                     <li>Designed custom <strong>sticker packs and digital assets</strong> optimized for social media and messaging platforms.</li>
@@ -654,7 +661,7 @@
             </div>
 
             <div class="job-item">
-                <div class="job-header">FASHION-PR — Graphic Designer | <em>July 2017 – April 2018</em></div>
+                <div class="job-header">FASHION-PR - Graphic Designer | <em>July 2017 – April 2018</em></div>
                 <ul class="job-desc">
                     <li>Developed and executed <strong>social media promotional campaigns</strong> for major international brands, including Conte, Lacoste, Liska, Marks &amp; Spencer, English Home, and Unice.</li>
                     <li>Created <strong>print-ready layouts and marketing materials</strong> for two <strong>large-scale branded events</strong>: the launch of Lacoste's new collection in Odesa and the Fashionology in-person conference in Kyiv.</li>
@@ -662,7 +669,7 @@
             </div>
 
             <div class="job-item">
-                <div class="job-header">Kyiv Academic Youth Theatre — Graphic Designer | <em>August 2016 – July 2017</em></div>
+                <div class="job-header">Kyiv Academic Youth Theatre - Graphic Designer | <em>August 2016 – July 2017</em></div>
                 <ul class="job-desc">
                     <li>Designing <strong>posters and handouts</strong> for theater productions (Pre-press).</li>
                     <li>Designing <strong>banners and billboards</strong> for outdoor advertising in the city.</li>
@@ -687,9 +694,9 @@
             <div class="edu-item"><strong>Work with Figma</strong><br>Cases, Kyiv | <em>2023</em></div>
 
             <div class="section-title">LANGUAGES</div>
-            <div class="lang-item"><strong>Ukrainian</strong> — Native</div>
-            <div class="lang-item"><strong>English</strong> — Upper-Intermediate</div>
-            <div class="lang-item"><strong>Portuguese</strong> — Elementary</div>
+            <div class="lang-item"><strong>Ukrainian</strong> - Native</div>
+            <div class="lang-item"><strong>English</strong> - Upper-Intermediate</div>
+            <div class="lang-item"><strong>Portuguese</strong> - Elementary</div>
         </div>
     </div>
 
@@ -784,123 +791,4 @@
         <div class="pop-header project-header">
             <div class="project-author-info">
                 <img src="me.png" alt="Kate Medvid" class="project-author-avatar">
-                <div class="project-title-text">
-                    <strong>ZaNovo creative post | Social</strong>
-                    <span>Kate Medvid</span>
-                </div>
-            </div>
-            <button type="button" class="close-pop-btn" onclick="closePop('social-pop')" aria-label="Close"></button>
-        </div>
-        <div class="pop-body project-body">
-            <div class="behance-feed">
-                <img src="Social/zanovo/social_1_1.jpg" alt="ZaNovo Creative Post 1" loading="lazy">
-                <img src="Social/zanovo/social_1_3.jpg" alt="ZaNovo Creative Post 3" loading="lazy">
-                <img src="Social/zanovo/social_1_2.jpg" alt="ZaNovo Creative Post 2" loading="lazy">
-                <img src="Social/zanovo/social_1_4.gif" alt="ZaNovo Creative Post 4" loading="lazy">
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function updateBodyLock() {
-            const anyOpen = document.querySelector('.pop-window.active') !== null;
-            document.body.classList.toggle('pop-open', anyOpen);
-        }
-
-        function pauseVideos(pop) {
-            pop.querySelectorAll('video').forEach(v => {
-                try { v.pause(); } catch (e) {}
-            });
-        }
-
-        function openPop(id) {
-            closeAllPops();
-            const pop = document.getElementById(id);
-            if (pop) {
-                // Скидання позиціонування перетягування при відкритті
-                pop.style.left = '';
-                pop.style.top = '';
-                pop.style.transform = '';
-                pop.classList.add('active');
-                pop.querySelectorAll('video').forEach(v => {
-                    const p = v.play();
-                    if (p && p.catch) p.catch(() => {});
-                });
-                const body = pop.querySelector('.pop-body');
-                if (body) body.scrollTop = 0;
-            }
-            updateBodyLock();
-        }
-
-        function closePop(id) {
-            const pop = document.getElementById(id);
-            if (pop) {
-                pop.classList.remove('active');
-                pauseVideos(pop);
-            }
-            updateBodyLock();
-        }
-
-        function closeAllPops() {
-            document.querySelectorAll('.pop-window').forEach(w => {
-                w.classList.remove('active');
-                pauseVideos(w);
-            });
-            updateBodyLock();
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeAllPops();
-        });
-
-        document.querySelectorAll('.pop-window').forEach(pop => {
-            const header = pop.querySelector('.pop-header');
-            if (!header) return;
-
-            let isDragging = false, startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
-
-            const startDrag = (clientX, clientY) => {
-                if (pop.classList.contains('full-screen')) return;
-                isDragging = true;
-                const rect = pop.getBoundingClientRect();
-
-                pop.style.left = rect.left + 'px';
-                pop.style.top = rect.top + 'px';
-                pop.style.transform = 'none';
-
-                startX = clientX;
-                startY = clientY;
-                initialLeft = rect.left;
-                initialTop = rect.top;
-            };
-
-            const doDrag = (clientX, clientY) => {
-                if (!isDragging) return;
-                pop.style.left = (initialLeft + clientX - startX) + 'px';
-                pop.style.top = (initialTop + clientY - startY) + 'px';
-            };
-
-            const stopDrag = () => { isDragging = false; };
-
-            header.addEventListener('mousedown', (e) => {
-                if (e.target.closest('.close-pop-btn')) return;
-                startDrag(e.clientX, e.clientY);
-            });
-            document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
-            document.addEventListener('mouseup', stopDrag);
-
-            header.addEventListener('touchstart', (e) => {
-                if (e.target.closest('.close-pop-btn')) return;
-                const touch = e.touches[0];
-                startDrag(touch.clientX, touch.clientY);
-            }, { passive: true });
-            document.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const touch = e.touches[0];
-                doDrag(touch.clientX, touch.clientY);
-            }, { passive: true });
-            document.addEventListener('touchend', stopDrag);
-        });
-    </script>
-</body>
-</html>
+                <div class
