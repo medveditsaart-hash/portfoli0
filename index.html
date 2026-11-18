@@ -56,7 +56,6 @@
 
         :root {
             --paper: rgba(226, 233, 218, 0.72);
-            --paper-back: rgba(190, 204, 182, 0.94);
             --paper-front: rgba(214, 223, 208, 0.94);
             --paper-line: rgba(255, 255, 255, 0.55);
             --tab-overlap: 12px;     /* наскільки вкладки заходять одна під одну */
@@ -147,25 +146,26 @@
         .tabs-row .tab-btn { padding-left: 6px; padding-right: 6px; }
         .tabs-row .tab-btn:not(:first-child) { padding-left: calc(var(--tab-overlap) + 6px); }
 
-        /* задні вкладки */
+        /* задні вкладки: той самий колір і та сама видима висота, що й у передніх */
         .tabs-back .tab-btn {
-            background: var(--paper-back);
-            padding-top: 9px;
-            padding-bottom: calc(var(--back-tuck) + 12px);
+            background: var(--paper-front);
+            padding-top: 8px;
+            padding-bottom: calc(var(--back-tuck) + 11px);
         }
 
         /* передні вкладки */
         .tabs-front .tab-btn {
             background: var(--paper-front);
-            padding-top: 10px;
+            padding-top: 8px;
             padding-bottom: 10px;
         }
 
-        /* перша передня вкладка (зі «світлофором») зливається з корпусом папки */
+        /* перша передня вкладка (зі «світлофором») зливається з корпусом папки,
+           але має ту саму висоту, що й сусідні */
         .tabs-front .tab-btn.has-controls {
             justify-content: flex-start;
             background: var(--paper);
-            padding: 13px 6px 12px 12px;
+            padding: 8px 6px 12px 12px;
             margin-bottom: -1px;
         }
 
@@ -181,7 +181,7 @@
             border-bottom: 1px solid var(--paper-line);
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
-            padding-top: 8px;
+            box-shadow: 0 -2px 5px rgba(18, 43, 28, 0.10);
         }
 
         .window-controls {
@@ -202,17 +202,23 @@
         .minimize { background: #ffbd2e; border: 1px solid #dea123; }
         .maximize { background: #27c93f; border: 1px solid #1aab29; }
 
+        /* Іконки: товщина лінії збігається з товщиною штрихів жирного тексту поряд.
+           non-scaling-stroke робить товщину в реальних пікселях, незалежно від масштабу іконки. */
         .tab-icon {
             width: 10px;
             height: 10px;
             stroke: #0c2014;
-            stroke-width: 1.8;
+            stroke-width: 1.3px;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 0.85;
+            opacity: 1;
             pointer-events: none;
             flex-shrink: 0;
+        }
+
+        .tab-icon * {
+            vector-effect: non-scaling-stroke;
         }
 
         .window {
