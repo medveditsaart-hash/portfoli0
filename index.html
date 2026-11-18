@@ -54,61 +54,107 @@
             z-index: 10;
         }
 
-        /* ПАНЕЛЬ ВКЛАДОК (DESKTOP) */
-        .folder-tabs {
-            display: flex;
-            position: relative;
-            z-index: 2;
-            top: 1px;
-            align-items: flex-end;
-            width: 100%;
-            box-sizing: border-box;
-            padding-right: 20px;
+        :root {
+            --paper: rgba(226, 233, 218, 0.72);
+            --paper-back: rgba(190, 204, 182, 0.7);
+            --paper-line: rgba(255, 255, 255, 0.55);
         }
 
-        .folder-tabs > *:nth-child(1) { z-index: 4; }
-        .folder-tabs > *:nth-child(2) { z-index: 3; }
-        .folder-tabs > *:nth-child(3) { z-index: 2; }
-        .folder-tabs > *:nth-child(4) { z-index: 1; }
+        /* ПАПКА: ДВА РЯДИ ВКЛАДОК (ЗАДНІЙ І ПЕРЕДНІЙ) */
+        .folder-tabs {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            top: 1px;
+            width: 100%;
+        }
+
+        .tabs-row {
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+        }
+
+        .tabs-back {
+            position: relative;
+            z-index: 1;
+            padding-left: 16px;
+            padding-right: 26px;
+            margin-bottom: -1px;
+        }
+
+        .tabs-front {
+            position: relative;
+            z-index: 2;
+        }
 
         .tab-btn {
             position: relative;
-            background: rgba(220, 228, 212, 0.62);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-bottom: none;
-            padding: 9px 8px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
             font-family: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
             font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 0.3px;
-            color: #0c2014;
-            cursor: pointer;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            transition: background 0.2s ease, transform 0.2s ease;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            flex: 1 1 0px;
-            min-width: 0;
-            margin-left: -8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #0c2014;
+            border: 1px solid var(--paper-line);
+            border-bottom: none;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: filter 0.2s ease;
         }
 
-        .tab-btn:first-child {
-            margin-left: 0;
+        .tab-btn:hover {
+            filter: brightness(1.12);
         }
 
-        .tab-btn.has-controls {
-            padding-left: 8px;
+        /* задні вкладки: вищі й трохи темніші */
+        .tabs-back .tab-btn {
+            background: var(--paper-back);
+            padding: 9px 10px 14px 10px;
+            flex: 1 1 0;
+        }
+        .tabs-back .tab-btn + .tab-btn {
+            margin-left: -10px;
+            padding-left: 18px;
+        }
+        .tabs-back .tab-btn:first-child { flex: 1.35 1 0; }
+
+        /* передні вкладки */
+        .tabs-front .tab-btn {
+            background: var(--paper);
+            padding: 10px 8px;
+            flex: 1 1 0;
+            margin-left: -10px;
+        }
+        .tabs-front .tab-btn:first-child { margin-left: 0; }
+
+        /* перша передня вкладка (зі «світлофором») зливається з корпусом папки */
+        .tabs-front .tab-btn.has-controls {
+            flex: 1.9 1 0;
             justify-content: flex-start;
+            padding: 13px 10px 12px 12px;
+            margin-bottom: -1px;
+            z-index: 3;
+        }
+
+        /* друга передня вкладка — нижча, з лінією краю папки під нею */
+        .tabs-front .tab-btn:not(.has-controls) {
+            border-bottom: 1px solid var(--paper-line);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            padding-top: 8px;
+            padding-left: 18px;
         }
 
         .window-controls {
@@ -119,8 +165,8 @@
         }
 
         .control-btn {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             cursor: pointer;
             display: inline-block;
@@ -129,11 +175,6 @@
         .close { background: #ff5f56; border: 1px solid #e0443e; }
         .minimize { background: #ffbd2e; border: 1px solid #dea123; }
         .maximize { background: #27c93f; border: 1px solid #1aab29; }
-
-        .tab-btn:hover {
-            z-index: 10 !important;
-            background: rgba(240, 245, 235, 0.8);
-        }
 
         .tab-icon {
             width: 12px;
@@ -150,7 +191,7 @@
 
         .window {
             position: relative;
-            background: rgba(230, 235, 222, 0.5);
+            background: var(--paper);
             backdrop-filter: blur(25px) saturate(140%);
             -webkit-backdrop-filter: blur(25px) saturate(140%);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -331,7 +372,7 @@
             transform: none !important;
             border-radius: 0 !important;
             border: none !important;
-            background: #f4f5f1;
+            background: #ffffff;
         }
 
         .pop-header.project-header {
@@ -390,7 +431,6 @@
             width: 100%;
         }
 
-        /* НАДІЙНИЙ НИЖНІЙ ВІДСТУП ДЛЯ МОБІЛЬНОГО CHROME / SAFARI */
         .behance-feed {
             display: flex;
             flex-direction: column;
@@ -398,8 +438,7 @@
             gap: 0;
             margin: 0;
             padding: 0;
-            padding-bottom: 100px;
-            padding-bottom: calc(100px + env(safe-area-inset-bottom));
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         .behance-feed img,
@@ -482,45 +521,8 @@
             margin-bottom: 6px;
         }
 
-        /* СТАБІЛЬНА МОБІЛЬНА СІТКА 2х2 ДЛЯ ВКЛАДОК ПАПОК */
+        /* МОБІЛЬНА ВЕРСІЯ */
         @media (max-width: 600px) {
-            .folder-container {
-                padding-top: 4px;
-            }
-            .folder-tabs {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-                padding-right: 0;
-                top: 0;
-            }
-            .tab-btn {
-                margin-left: 0 !important;
-                border: 1px solid rgba(255, 255, 255, 0.5);
-                border-radius: 10px;
-                padding: 10px 8px;
-                font-size: 0.65rem;
-                letter-spacing: 0.2px;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-                justify-content: center;
-                width: 100%;
-            }
-            .tab-btn.has-controls {
-                padding-left: 10px;
-                justify-content: flex-start;
-            }
-            .window {
-                border-top-left-radius: 20px;
-                margin-top: 8px;
-            }
-            .control-btn {
-                width: 9px;
-                height: 9px;
-            }
-            .tab-icon {
-                width: 11px;
-                height: 11px;
-            }
             .hero-title { font-size: 3.2rem; }
             .window-body { padding: 22px 16px; }
             .pop-body { padding: 18px 14px; }
@@ -540,36 +542,36 @@
     <div class="bg-overlay" onclick="closeAllPops()"></div>
 
     <div class="folder-container" id="main-folder">
-        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ (BRANDING ПЕРШИЙ) -->
+        <!-- ПАНЕЛЬ ВКЛАДОК ПАПКИ -->
         <div class="folder-tabs">
-            <!-- Вкладка 1: BRANDING (З КНОПКАМИ КЕРУВАННЯ) -->
-            <button type="button" class="tab-btn has-controls" onclick="openPop('branding-pop')">
-                <span class="window-controls">
-                    <span class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></span>
-                    <span class="control-btn minimize" onclick="event.stopPropagation()"></span>
-                    <span class="control-btn maximize" onclick="event.stopPropagation()"></span>
-                </span>
-                <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
-                BRANDING
-            </button>
+            <!-- ЗАДНІЙ РЯД -->
+            <div class="tabs-row tabs-back">
+                <button type="button" class="tab-btn" onclick="openPop('illustration-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    ILLUSTRATION
+                </button>
+                <button type="button" class="tab-btn" onclick="openPop('social-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    SOCIAL
+                </button>
+            </div>
 
-            <!-- Вкладка 2: AI-POSTERS -->
-            <button type="button" class="tab-btn" onclick="openPop('ai-pop')">
-                <svg class="tab-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                AI-POSTERS
-            </button>
-
-            <!-- Вкладка 3: ILLUSTRATION -->
-            <button type="button" class="tab-btn" onclick="openPop('illustration-pop')">
-                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                ILLUSTRATION
-            </button>
-
-            <!-- Вкладка 4: SOCIAL -->
-            <button type="button" class="tab-btn" onclick="openPop('social-pop')">
-                <svg class="tab-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                SOCIAL
-            </button>
+            <!-- ПЕРЕДНІЙ РЯД -->
+            <div class="tabs-row tabs-front">
+                <button type="button" class="tab-btn has-controls" onclick="openPop('branding-pop')">
+                    <span class="window-controls">
+                        <span class="control-btn close" onclick="event.stopPropagation(); closeAllPops()"></span>
+                        <span class="control-btn minimize" onclick="event.stopPropagation()"></span>
+                        <span class="control-btn maximize" onclick="event.stopPropagation()"></span>
+                    </span>
+                    <svg class="tab-icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                    BRANDING
+                </button>
+                <button type="button" class="tab-btn" onclick="openPop('ai-pop')">
+                    <svg class="tab-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    AI-POSTERS
+                </button>
+            </div>
         </div>
 
         <div class="window">
@@ -607,68 +609,68 @@
             <img src="me.gif" alt="Kate Medvid" class="pop-gif">
 
             <p class="about-summary">
-                Senior Graphic Designer with 10 years of experience in brand identity, social-first creative, and AI-assisted visual production. Skilled at building scalable brand systems for media channels reaching 3M+ audience across the U.S. and European markets. Combines strong typography and composition fundamentals with hands-on expertise in AI image generation to deliver high-volume creative output at consistent brand quality.
+                Senior Graphic Designer with 10 years of experience in brand identity, digital campaigns, and AI-assisted visual production. Skilled at building scalable brand systems for media channels reaching 3M+ audience across the U.S. and European markets. Combines strong typography and composition fundamentals with hands-on expertise in AI image generation to deliver high-volume creative output at consistent brand quality.
             </p>
 
             <div class="section-title">TECHNICAL SKILLS</div>
             <ul class="skills-list">
-                <li><strong>Design Tools:</strong> Figma, Adobe Photoshop, Illustrator, InDesign, Canva</li>
-                <li><strong>Motion &amp; Video:</strong> Adobe After Effects, Premiere Pro</li>
-                <li><strong>AI Tools:</strong> Midjourney, Adobe Firefly, ChatGPT, Gemini, Claude</li>
-                <li><strong>Other:</strong> Pre-press, Typography, Color Theory, Jira, Trello, Slack, Tilda, WIX</li>
+                <li><strong>Design Tools:</strong> Figma, Adobe Photoshop, Illustrator, InDesign, Canva.</li>
+                <li><strong>Motion &amp; Video:</strong> Adobe After Effects, Premiere Pro.</li>
+                <li><strong>AI Tools:</strong> Midjourney, Adobe Firefly, ChatGPT, Gemini, Claude.</li>
+                <li><strong>Other:</strong> Pre-press, Typography, Color Theory, Jira, Trello, Slack, Tilda, WIX.</li>
             </ul>
 
             <div class="section-title">WORK EXPERIENCE</div>
 
             <div class="job-item">
-                <div class="job-header">Genesis, AMO — Senior Graphic Designer | June 2021 – July 2026</div>
+                <div class="job-header">Genesis, AMO — Senior Graphic Designer | <em>June 2021 – July 2026</em></div>
                 <ul class="job-desc">
-                    <li>Developed visual identity and creative systems for 10+ social media channels (Meta, TikTok, YouTube, Snapchat) targeting U.S. and European audiences, contributing to combined reach of 3M+ followers across platforms.</li>
-                    <li>Designed AI-assisted key art and poster series for a vertical-drama streaming platform, maintaining consistent characters and visual style across a multi-episode content library for B2B clients.</li>
-                    <li>Designed presentations and sales decks for the sales team, supporting deal closures.</li>
-                    <li>Led and reviewed work of 3 junior designers, maintaining consistent quality and creative standards across the team's output.</li>
-                    <li>Participated in and led one of the teams working on new YouTube projects within the company.</li>
+                    <li>Developed <strong>visual identity and creative systems</strong> for 10+ social media channels (Meta, TikTok, YouTube, Snapchat) targeting U.S. and European audiences, contributing to combined reach of 3M+ followers across platforms.</li>
+                    <li>Designed <strong>AI-assisted key art</strong> and poster series for a vertical-drama streaming platform, maintaining consistent characters and visual style across a multi-episode content library for B2B clients.</li>
+                    <li>Designed <strong>presentations and sales decks</strong> for the sales team, supporting deal closures.</li>
+                    <li><strong>Led and reviewed work</strong> of 3 junior designers, maintaining consistent quality and creative standards across the team's output.</li>
+                    <li><strong>Participated in and led</strong> one of the teams working on new YouTube projects within the company.</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                <div class="job-header">1+1 media — Middle Graphic Designer | June 2019 – June 2021</div>
+                <div class="job-header">1+1 media — Middle Graphic Designer | <em>June 2019 – June 2021</em></div>
                 <ul class="job-desc">
-                    <li>Developed brand books and visual identity guidelines for internal company products, ensuring consistency across all touchpoints.</li>
-                    <li>Retouched and prepared photos of actors and TV hosts for further animation and use in broadcast graphics.</li>
-                    <li>Collaborated with the Marketing Department to develop a consistent tone of voice and visual identity for social media.</li>
-                    <li>Served as the lead designer for the website’s visual, as well as for organizational and promotional materials, from concept through launch, for the 1+1 Digital Weekend 2020 conference.</li>
-                    <li>Designed creative landing pages for informational products, focusing on visual storytelling and user engagement.</li>
+                    <li>Developed <strong>brand books</strong> and <strong>visual identity guidelines</strong> for internal company products, ensuring consistency across all touchpoints.</li>
+                    <li><strong>Retouched and prepared photos</strong> of actors and TV hosts for further animation and use in broadcast graphics.</li>
+                    <li><strong>Collaborated with the Marketing Department</strong> to develop a consistent tone of voice and visual identity for social media.</li>
+                    <li>Served as the <strong>lead designer for the website’s visual</strong>, as well as for organizational and promotional materials, from concept through launch, for the 1+1 Digital Weekend 2020 conference.</li>
+                    <li>Designed creative <strong>landing pages</strong> for informational products, focusing on visual storytelling and user engagement.</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                <div class="job-header">PlusOne DA — Middle Graphic Designer | May 2018 – May 2019</div>
+                <div class="job-header">PlusOne DA — Middle Graphic Designer | <em>May 2018 – May 2019</em></div>
                 <ul class="job-desc">
-                    <li>Created frame-by-frame graphic illustrations and storyboard visuals for video content for clients such as DTEK and Bogdan Corporation.</li>
-                    <li>Designed custom sticker packs and digital assets optimized for social media and messaging platforms.</li>
-                    <li>Developed creative concepts and visual materials for political and pre-election campaigns, focusing on clear communication and audience engagement.</li>
+                    <li>Created frame-by-frame <strong>graphic illustrations</strong> and storyboard visuals for video content for clients such as DTEK and Bogdan Corporation.</li>
+                    <li>Designed custom <strong>sticker packs and digital assets</strong> optimized for social media and messaging platforms.</li>
+                    <li>Developed creative concepts and visual materials for <strong>political and pre-election campaigns</strong>, focusing on clear communication and audience engagement.</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                <div class="job-header">FASHION-PR — Graphic Designer | July 2017 – April 2018</div>
+                <div class="job-header">FASHION-PR — Graphic Designer | <em>July 2017 – April 2018</em></div>
                 <ul class="job-desc">
-                    <li>Developed and executed social media promotional campaigns for major international brands, including Conte, Lacoste, Liska, Marks &amp; Spencer, English Home, and Unice.</li>
-                    <li>Created print-ready layouts and marketing materials for two large-scale branded events: the launch of Lacoste's new collection in Odesa and the Fashionology in-person conference in Kyiv.</li>
+                    <li>Developed and executed <strong>social media promotional campaigns</strong> for major international brands, including Conte, Lacoste, Liska, Marks &amp; Spencer, English Home, and Unice.</li>
+                    <li>Created <strong>print-ready layouts and marketing materials</strong> for two <strong>large-scale branded events</strong>: the launch of Lacoste's new collection in Odesa and the Fashionology in-person conference in Kyiv.</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                <div class="job-header">Kyiv Academic Youth Theatre — Graphic Designer | August 2016 – July 2017</div>
+                <div class="job-header">Kyiv Academic Youth Theatre — Graphic Designer | <em>August 2016 – July 2017</em></div>
                 <ul class="job-desc">
-                    <li>Designing posters and handouts for theater productions (Pre-press).</li>
-                    <li>Designing banners and billboards for outdoor advertising in the city.</li>
+                    <li>Designing <strong>posters and handouts</strong> for theater productions (Pre-press).</li>
+                    <li>Designing <strong>banners and billboards</strong> for outdoor advertising in the city.</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                <div class="job-header">Freelance Graphic Designer | April 2016 – Present</div>
+                <div class="job-header">Freelance Graphic Designer | <em>April 2016 – Present</em></div>
                 <ul class="job-desc">
                     <li>Retouched and processed over 500+ images for e-commerce catalogs.</li>
                     <li>Designed original prints and graphic patterns for clothing collections, aligning with brand identity and seasonal trends.</li>
@@ -678,11 +680,11 @@
             </div>
 
             <div class="section-title">EDUCATION</div>
-            <div class="edu-item"><strong>Bachelor’s Degree in Engineering Technology</strong> — KNUTD, Kyiv | 2011</div>
-            <div class="edu-item"><strong>Master's Degree in Design / Fine Arts</strong> — KNUTD, Kyiv | 2013</div>
-            <div class="edu-item"><strong>Illustration Pro</strong> — Projector Institute, Kyiv | 2021</div>
-            <div class="edu-item"><strong>Motion Design Beginning</strong> — Projector Institute, Kyiv | 2022</div>
-            <div class="edu-item"><strong>Work with Figma</strong> — Cases, Kyiv | 2023</div>
+            <div class="edu-item"><strong>Bachelor’s Degree in Engineering Technology</strong><br>KNUTD, <em>Kyiv | 2011</em></div>
+            <div class="edu-item"><strong>Master's Degree in Design / Fine Arts</strong><br>KNUTD, <em>Kyiv | 2013</em></div>
+            <div class="edu-item"><strong>Illustration Pro</strong><br>Projector Institute, Kyiv | <em>2021</em></div>
+            <div class="edu-item"><strong>Motion Design Beginning</strong><br>Projector Institute, Kyiv | <em>2022</em></div>
+            <div class="edu-item"><strong>Work with Figma</strong><br>Cases, Kyiv | <em>2023</em></div>
 
             <div class="section-title">LANGUAGES</div>
             <div class="lang-item"><strong>Ukrainian</strong> — Native</div>
@@ -815,7 +817,7 @@
             closeAllPops();
             const pop = document.getElementById(id);
             if (pop) {
-                // Скидання відносного позиціонування перетягування при відкритті
+                // Скидання позиціонування перетягування при відкритті
                 pop.style.left = '';
                 pop.style.top = '';
                 pop.style.transform = '';
