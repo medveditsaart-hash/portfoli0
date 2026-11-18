@@ -43,7 +43,7 @@
             z-index: 10;
         }
 
-        /* ПАНЕЛЬ ВКЛАДОК */
+        /* ПАНЕЛЬ ВКЛАДОК (DESKTOP) */
         .folder-tabs {
             display: flex;
             position: relative;
@@ -81,7 +81,7 @@
             align-items: center;
             justify-content: center;
             gap: 4px;
-            transition: all 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
             flex: 1 1 0px;
             min-width: 0;
@@ -146,4 +146,71 @@
             border-radius: 20px;
             border-top-left-radius: 0px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45),
-                        inset 0 1px 1px rgba(255, 255, 255,
+                        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .window-body {
+            padding: 32px 28px 28px 28px;
+            text-align: center;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #122b1c;
+            border-bottom: 1px dashed rgba(18, 43, 28, 0.3);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .divider-line {
+            border-bottom: 1px dashed rgba(18, 43, 28, 0.3);
+            margin: 28px 0;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.2rem;
+            font-weight: 300;
+            color: #0e3019;
+            line-height: 1.02;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 2.5px;
+            color: #122b1c;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .window-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(18, 43, 28, 0.25);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0c2014;
+        }
+
+        .footer-btn, .contacts-links a {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: #09170e;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.45);
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid rgba
